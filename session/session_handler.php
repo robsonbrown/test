@@ -45,8 +45,6 @@ else if( $header == 'signUp' )
 {
 	debug('signUp called');
 
-	echo "false";
-
 	$username=$_POST['username']; 
 	$name=$_POST['name']; 
 	$password=$_POST['password']; 
