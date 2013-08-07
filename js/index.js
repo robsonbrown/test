@@ -19,7 +19,6 @@
 			if( result == 'false' )
 			{
 				alert("You have entered an incorrect user name or password.");
-				alert(result);
 			}
 			else if( result == 'passed' )
 			{
@@ -27,7 +26,7 @@
 			}
 			else
 			{
-				alert( result );
+				alert( "Shouldn't be here" );
 			}
 		});
 	   });

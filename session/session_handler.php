@@ -1,7 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user_transaction.php');
-
 require_once($_SERVER['DOCUMENT_ROOT'].'/test/phpConsole.php');
 
 if(!isset($_SESSION)) 
@@ -9,57 +8,62 @@ if(!isset($_SESSION))
 	session_start();
 }
 
-$header = $_POST['head'];
+if(isset( $_POST['head'] )) 
+{
+	$header = $_POST['head'];
 
-PhpConsole::start(true, true, dirname(__FILE__));
+	PhpConsole::start(true, true, dirname(__FILE__));
 
-if( $header == 'login' )
-{	
-	debug('login called');
-
-	// username and password sent from form 
-	$username=$_POST['username']; 
-	$password=$_POST['password']; 
+	if( $header == 'login' )
+	{	
+		debug('login called');
 	
-	// To protect MySQL injection (more detail about MySQL injection)
-	$username = stripslashes($username);
-	$password = stripslashes($password);
-	$username = mysql_real_escape_string($username);
-	$password = mysql_real_escape_string($password);
-	
-	$user = new User();
-	
-	if( $user->login_user( $username, $password ) )
+		// username and password sent from form 
+		$username=$_POST['username']; 
+		$password=$_POST['password']; 
+		
+		// To protect MySQL injection (more detail about MySQL injection)
+		$username = stripslashes($username);
+		$password = stripslashes($password);
+		$username = mysql_real_escape_string($username);
+		$password = mysql_real_escape_string($password);
+		
+		$user = new User();
+		
+		if( $user->login_user( $username, $password ) )
+		{
+			debug('login passed');
+			
+			// Register $myusername, $mypassword and redirect to file "login_success.php"
+			$_SESSION["user"] = $user;
+			
+			echo "passed";
+		}
+		else 
+		{
+			debug('login failed');
+			echo "false";
+		}
+	}
+	else if( $header == 'signUp' )
 	{
-		echo "passed";
-		// Register $myusername, $mypassword and redirect to file "login_success.php"
-		$_SESSION["user"] = $user;
-		header("location:/test/member.php");
+		debug('signUp called');
+	
+		$username=$_POST['username']; 
+		$name=$_POST['name']; 
+		$password=$_POST['password']; 
+		$finance=$_POST['finance']; 
+		$email=$_POST['email']; 
+		
+		$user = new User();
+		$user->set_user( -1, $username, $name, md5($password), $finance, $email );
+		$user->create_new_user();
 	}
 	else 
 	{
-		echo "false";
+		debug('Shouldnt be here');
 	}
 }
-else if( $header == 'signUp' )
-{
-	debug('signUp called');
-
-	$username=$_POST['username']; 
-	$name=$_POST['name']; 
-	$password=$_POST['password']; 
-	$finance=$_POST['finance']; 
-	$email=$_POST['email']; 
-	
-	$user = new User();
-	$user->set_user( -1, $username, $name, md5($password), $finance, $email );
-	$user->create_new_user();
-}
-else 
-{
-	debug('Shouldnt be here');
-}
-
 
 //if( ! isset($_SESSION['user']) )
 //{
