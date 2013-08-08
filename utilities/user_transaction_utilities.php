@@ -1,7 +1,7 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user_transaction.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/mysql/phpMysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user_transaction.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/mysql/phpMysql.php');
 
 if(!isset($_SESSION)) 
 { 

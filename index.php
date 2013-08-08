@@ -54,6 +54,8 @@
 
 	<?php
 		include '/php/login.php';
+		
+		//Let us check the database exists.
 	?>
 
 </html>

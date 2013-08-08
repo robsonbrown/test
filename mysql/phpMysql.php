@@ -1,5 +1,9 @@
 <?php
 
+	include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');
+	
+	PhpConsole::start(true, true, dirname(__FILE__));
+
 	class Mysql
 	{
 		protected $host		="localhost"; // Host name 
@@ -11,20 +15,24 @@
 		//------------------------
 		// Mysql core connection function
 		//------------------------
-		private function mysqlConnect()
+		private function mysqlConnect( &$status )
 		{
 			// Create connection
 			$con=mysqli_connect( $this->host, $this->username, $this->password, $this->db_name );
-			
+		
 			// Check connection
-			if (mysqli_connect_errno($con))
+			if ( !$con )
 			{
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+				$status = $con->connect_errno;
+			}
+			else
+			{				
+				$status = true;
 			}
 			
-			//echo "connected to database";
-			
 			return $con;
+			
 		}
 		
 		//-----------------------
@@ -32,7 +40,7 @@
 		//------------------------
 		protected function runMysql( $sql, $queryDescription )
 		{
-			$con = $this->mysqlConnect();
+			$con = $this->mysqlConnect( $status );
 		
 			// Execute query
 			if ( $result = mysqli_query($con,$sql) )
@@ -144,6 +152,25 @@
 			else
 			{
 				echo "Error creating database: " . mysqli_error($con);
+			}
+		}
+		
+		//------------------------
+		// database connection check
+		//------------------------
+		public function checkDatabaseConnection()
+		{
+			$status = false;
+		
+			$con = $this->mysqlConnect( $status );
+		
+			if( $status )
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
 			}
 		}
 		

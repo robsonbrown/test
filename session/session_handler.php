@@ -1,7 +1,7 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/classes/user_transaction.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/test/phpConsole.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user_transaction.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');
 
 if(!isset($_SESSION)) 
 { 
@@ -74,7 +74,7 @@ if (isset($_POST['logout']))
 {
 	// Check to see if the logout button has been pressed.
 	session_destroy();
-	header("location:/test/index.php");
+	header("location:/index.php");
 }
 
 //------------------------
@@ -99,7 +99,7 @@ function check_session_state()
 	}
 	else
 	{
-		header("location:/test/index.php");
+		header("location:/index.php");
 	}
 }
 

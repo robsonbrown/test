@@ -1,6 +1,6 @@
 <?php
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/test/mysql/phpMysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/mysql/phpMysql.php');
 include_once( 'user_transaction.php' );
 
 class User
@@ -96,7 +96,7 @@ class User
 			$this->login_user( $this->first_name, $this->password );
 			$_SESSION["user"] = $this;
 			
-			header("location:/test/member.php");
+			header("location:/member.php");
 		}
 	}
 	
