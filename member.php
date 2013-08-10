@@ -11,6 +11,7 @@
 			<form name="newTransactionForm" method="post" action="/php/member.php">
 				<td>
 				<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+				<p class="validateTips">All form fields are required.</p>
 				<tr>
 				<td colspan="3"><strong>New Transaction </strong></td>
 				</tr>
@@ -52,4 +53,5 @@ include '/php/member.php';
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
+<script type="text/javascript" src="js/list_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>

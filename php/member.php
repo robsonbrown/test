@@ -27,12 +27,12 @@
 		
 			if( insert_user_transaction( $amount, $time, $category ) )
 			{
-				debug( 'passed!');
-				echo 'passed';
+				//debug( 'passed!');
+				echo false;
 			}
 			else
 			{
-				echo 'false';
+				echo false;
 			}
 		}
 	}

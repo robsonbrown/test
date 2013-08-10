@@ -8,32 +8,46 @@ check.setAttribute("type", "date");
       .button()
       .click(function() 
 	  {
-		var header 		= "addFinance";
-		var myamount 	= $( "#amount" ).val();
-		var	mytime 		= $( "#time" ).val();
-		var mycategory  = $( "#category" ).val();
+		var bValid = true;
 		
-		$.ajax({
-		type: "POST",
-		url: "/php/member.php",
-		data: {head:header, amount:myamount, time:mytime, category:mycategory}
-		}).done(function( result ) 
-		{		
-			alert( result );
+		tips = $( ".validateTips" );
+	  
+		//Check that the values 
+		bValid = bValid && checkLength( $( "#amount" ), "amount", 3, 16 );
+		bValid = bValid && checkRegexp( $( "#amount" ), /^([0-9])+$/, "Password field only allow : a-z 0-9" );
+	  
+	  
+		if ( bValid ) 
+		{	
+			var header 		= "addFinance";
+			var myamount 	= $( "#amount" ).val();
+			var	mytime 		= $( "#time" ).val();
+			var mycategory  = $( "#category" ).val();
 		
-			if( result == 'false' )
-			{
-				alert("You have entered an incorrect user name or password.");
-			}
-			else if( result == 'passed' )
-			{
-				location.reload();
-			}
-			else
-			{
-				alert( "Shouldn't be here" );
-			}
-		});
+			$.ajax({
+			type: "POST",
+			url: "/php/member.php",
+			data: {head:header, amount:myamount, time:mytime, category:mycategory}
+			}).done(function( result ) 
+			{				
+				if( result == false )
+				{
+					alert("The transaction could not be undertaken, please contact an administrator.");
+				}
+				else if( result == true )
+				{
+					location.reload();
+				}
+				else
+				{
+					alert( "Shouldn't be here" );
+				}
+			});
+		}
+		else
+		{
+			alert( "Screwed!");
+		}
 	  });
 	  
 

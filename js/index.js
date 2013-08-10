@@ -21,7 +21,7 @@
 				alert("You have entered an incorrect user name or password.");
 			}
 			else if( result == 'passed' )
-			{;
+			{
 				location.reload();
 			}
 			else
