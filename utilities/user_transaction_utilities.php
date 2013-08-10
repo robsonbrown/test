@@ -34,8 +34,6 @@ function insert_user_transaction( $amount, $time, $category )
 		
 		$_SESSION['user'] = $user;
 		
-		echo "worked!";
-		
 		return true;
 	}
 	

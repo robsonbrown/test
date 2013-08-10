@@ -34,8 +34,6 @@ class User
 		//Add the core user information
 		$query = "select * from user where user_name = '" . $user_name_in . "' and password = '" . md5($password_in) . "'";
 		
-		//echo "selecting user</br>";
-		
 		if( !$mysqlConnection->mysql_select( $query, "user select", 1, $result ) )
 		{
 			return false;

@@ -3,6 +3,42 @@
 var check = document.createElement("input");
 check.setAttribute("type", "date");
 
+
+ $( "#add" )
+      .button()
+      .click(function() 
+	  {
+		var header 		= "addFinance";
+		var myamount 	= $( "#amount" ).val();
+		var	mytime 		= $( "#time" ).val();
+		var mycategory  = $( "#category" ).val();
+		
+		$.ajax({
+		type: "POST",
+		url: "/php/member.php",
+		data: {head:header, amount:myamount, time:mytime, category:mycategory}
+		}).done(function( result ) 
+		{		
+			alert( result );
+		
+			if( result == 'false' )
+			{
+				alert("You have entered an incorrect user name or password.");
+			}
+			else if( result == 'passed' )
+			{
+				location.reload();
+			}
+			else
+			{
+				alert( "Shouldn't be here" );
+			}
+		});
+	  });
+	  
+
+
+
 if(check.type === "text"){
     $('input[type="date"]').each(function(){
         var input = $(this);

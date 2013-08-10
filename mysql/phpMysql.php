@@ -183,8 +183,6 @@
 			
 			$row = mysqli_fetch_array($result);
 			
-			echo $row['id'];
-			
 			return $row['id'];			
 		}
 	}

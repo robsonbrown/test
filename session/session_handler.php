@@ -92,9 +92,7 @@ function check_session_state()
 		
 		if($temp != null)
 		{
-			$temp2 = $usert->cast($temp);
-		
-			echo $temp2->get_amount();
+			$temp2 = $usert->cast($temp);;
 		}
 	}
 	else
