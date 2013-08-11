@@ -154,6 +154,15 @@ class User
 		return $this->id;
 	}
 	
+	//-----------------------
+	// 
+	//------------------------
+	public function get_finance_total()
+	{
+		return $this->finance_total;
+	}
+	
+	
 	// property declaration
     protected $id 			 			= 0;
 	protected $user_name	 			= '';

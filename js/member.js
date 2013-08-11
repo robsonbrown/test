@@ -4,6 +4,35 @@ var check = document.createElement("input");
 check.setAttribute("type", "date");
 
 
+//-------------------
+// Gets the current amount of funds for the current user
+//--------------------
+$('#funds')
+.text
+(function( n )
+	{
+		var funds_value;
+	
+		$.ajax
+		({
+		type: "GET",
+		url: "/php/member.php",
+		async: false,
+		data: "funds"
+		}).success(
+			function( result ) 
+			{			
+				funds_value = result;
+				return result;
+			});
+			
+			return funds_value;
+	}   
+);
+
+//-------------------
+// When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
+//--------------------
  $( "#add" )
       .button()
       .click(function() 
@@ -13,9 +42,11 @@ check.setAttribute("type", "date");
 		tips = $( ".validateTips" );
 	  
 		//Check that the values 
-		bValid = bValid && checkLength( $( "#amount" ), "amount", 3, 16 );
-		bValid = bValid && checkRegexp( $( "#amount" ), /^([0-9])+$/, "Password field only allow : a-z 0-9" );
-	  
+		bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
+		bValid = bValid && checkRegexp( $( "#amount" ), /^([0-9]) /, "Password field only allow : 0-9" );
+		
+		bValid = bValid && checkLength( $( "#time" ).val(), "time", 1, 10 );
+		bValid = bValid && checkLength( $( "#category" ).val(), "category", 1, 10 );
 	  
 		if ( bValid ) 
 		{	
@@ -53,6 +84,9 @@ check.setAttribute("type", "date");
 
 
 
+//-------------------
+// Checks that HTML5 can be used in the browser for the calendar picker.
+//--------------------
 if(check.type === "text"){
     $('input[type="date"]').each(function(){
         var input = $(this);
@@ -74,19 +108,3 @@ if(check.type === "text"){
         input.hide();
     });
 }
-
-$('#submit-button').click(function() {
-    var name = $('#username').val();
-    $.ajax({
-        type: 'POST',
-        url: 'php_file_to_execute.php',
-        data: {username: name},
-        success: function(data) {
-            if(data == "1") {
-                document.write("Success");   
-            } else {
-                document.write("Something went wrong");
-            }
-        }
-    });
-});

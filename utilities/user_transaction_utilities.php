@@ -9,7 +9,7 @@ if(!isset($_SESSION))
 } 
 
 //------------------------
-// 
+//  Adds a transaction for the user.
 //------------------------
 function insert_user_transaction( $amount, $time, $category )
 {

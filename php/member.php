@@ -11,10 +11,28 @@
 		session_start();
 	} 
 	
+	//-------------------
+	// Loads the current funds box for the user
+	//--------------------
+	if(isset( $_GET['funds'] ))
+	{
+		$user = $_SESSION['user'];
+		
+		debug( $user->get_finance_total() );
+		
+		echo $user->get_finance_total();
+	}
+	
+	//-------------------
+	// Post back functions
+	//--------------------
 	if(isset( $_POST['head'] )) 
 	{
 		$header = $_POST['head'];
 	
+		//-------------------
+		// Post function for the add transaction option
+		//-------------------
 		if( $header == 'addFinance' )
 		{				
 			debug('Adding a financial transaction called.');

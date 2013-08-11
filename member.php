@@ -4,8 +4,10 @@
 		<form name="logout" method="post" >
 			<input type="submit" name="logout" value="logout">
 		</form>
-	
 		
+		<div id="funds" >
+		</div>
+	
 		<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<form name="newTransactionForm" method="post" action="/php/member.php">
