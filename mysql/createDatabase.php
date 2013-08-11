@@ -32,7 +32,7 @@ function createDatabaseTables( $mysqlConnection )
 function createUserTable( $mysqlConnection )
 {
 	// Create table User
-	$sql="CREATE TABLE user(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_name VARCHAR(30), name VARCHAR(50), password VARCHAR(100), finance_total INT, email_address VARCHAR(50) )";
+	$sql="CREATE TABLE user(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_name VARCHAR(30), name VARCHAR(50), password VARCHAR(100), finance_total DECIMAL(4,2), email_address VARCHAR(50) )";
 	$mysqlConnection->mysql_create( $sql, "User table creation" );
 }
 
@@ -42,7 +42,7 @@ function createUserTable( $mysqlConnection )
 function createFinancialTransactionTable( $mysqlConnection )
 {
 	//Create table financial_transaction
-	$sql= "CREATE TABLE user_transaction(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount INT NOT NULL, time DATETIME NOT NULL, category INT NOT NULL )";
+	$sql= "CREATE TABLE user_transaction(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(4,2) NOT NULL, time DATETIME NOT NULL, category INT NOT NULL )";
 	$mysqlConnection->mysql_create( $sql, "Finance table creation" );
 }
 
@@ -52,7 +52,7 @@ function createFinancialTransactionTable( $mysqlConnection )
 function createDirectDebitTable( $mysqlConnection )
 {
 	//Create table financial_transaction
-	$sql= "CREATE TABLE user_direct_debit(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount INT NOT NULL, start_date DATETIME NOT NULL, recorruance_type tinyint, end_date DATETIME, category INT NOT NULL )";
+	$sql= "CREATE TABLE user_direct_debit(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(4,2) NOT NULL, start_date DATETIME NOT NULL, recorruance_type tinyint, end_date DATETIME, category INT NOT NULL )";
 	$mysqlConnection->mysql_create( $sql, "Finance table creation" );
 }
 
