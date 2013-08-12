@@ -2,6 +2,10 @@
 
 class UserTransaction
 {	
+	//Transaction types
+	const TT_WITHDRAWAL = 1;
+	const TT_ADDITION   = 2;
+	
 	//-----------------------
 	// 
 	//------------------------

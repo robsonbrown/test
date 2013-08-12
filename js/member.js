@@ -43,10 +43,10 @@ $('#funds')
 	  
 		//Check that the values 
 		bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
-		bValid = bValid && checkRegexp( $( "#amount" ), /^([0-9]) /, "Password field only allow : 0-9" );
+		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Password field only allow : 0-9" );
 		
-		bValid = bValid && checkLength( $( "#time" ).val(), "time", 1, 10 );
-		bValid = bValid && checkLength( $( "#category" ).val(), "category", 1, 10 );
+		bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
+		bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
 	  
 		if ( bValid ) 
 		{	

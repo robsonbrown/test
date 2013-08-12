@@ -11,7 +11,7 @@ if(!isset($_SESSION))
 //------------------------
 //  Adds a transaction for the user.
 //------------------------
-function insert_user_transaction( $amount, $time, $category )
+function insert_user_transaction( $amount, $time, $category, $type )
 {
 	$user = $_SESSION['user'];
 	
@@ -19,6 +19,15 @@ function insert_user_transaction( $amount, $time, $category )
 	$mysqlConnection = new Mysql;
 		
 	$query = "INSERT INTO user_transaction (user_id, amount, time, category) ";
+	
+	//If the type is to withdraw the cash, make it a negative
+	if($type == UserTransaction::TT_WITHDRAWAL )
+	{
+		if( $amount > 0 )
+		{
+			$amount = amount_negate($amount);
+		}
+	}
 	
 	$values = array( $user->get_id(), $amount, $time, $category );
 	
@@ -30,7 +39,7 @@ function insert_user_transaction( $amount, $time, $category )
 		$added_id = $mysqlConnection->select_most_recent_id( $user->get_id(), "user_transaction");
 
 		//Finally, let's add it to the current session.
-		$user->add_user_transaction( $added_id, $amount, $time, $category );
+		$user->add_user_transaction( $added_id, $amount, $time, $category, $type );
 		
 		$_SESSION['user'] = $user;
 		
@@ -38,6 +47,17 @@ function insert_user_transaction( $amount, $time, $category )
 	}
 	
 	return false;	
+}
+
+
+//------------------------
+//  Converts a number from a positive to a negative
+//------------------------
+function amount_negate( $amount )
+{
+	$amount = -$amount;
+
+	return $amount;
 }
 
 ?>

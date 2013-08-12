@@ -33,17 +33,26 @@
 		//-------------------
 		// Post function for the add transaction option
 		//-------------------
-		if( $header == 'addFinance' )
+		if( $header == 'addFinance' || $header == 'removeFinance' )
 		{				
-			debug('Adding a financial transaction called.');
+			debug( $header . ' called.');
 		
 			$amount=$_POST['amount']; 
 			$time=$_POST['time']; 
 			$category=$_POST['category']; 
 			
+			if( $header == 'addFinance' )
+			{
+				$type = UserTransaction::TT_ADDITION;
+			}
+			else
+			{
+				$type = UserTransaction::TT_WITHDRAWAL;
+			}
+			
 			//debug( 'amount is : ' . $amount . ' time is : ' . $time . ' category is : ' . $category );
 		
-			if( insert_user_transaction( $amount, $time, $category ) )
+			if( insert_user_transaction( $amount, $time, $category, $type ) )
 			{
 				//debug( 'passed!');
 				echo false;
