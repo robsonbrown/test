@@ -2,11 +2,14 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user_transaction.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/mysql/phpMysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');
 
 if(!isset($_SESSION)) 
 { 
 	session_start();
 } 
+
+PhpConsole::start(true, true, dirname(__FILE__));
 
 //------------------------
 //  Adds a transaction for the user.
@@ -23,10 +26,18 @@ function insert_user_transaction( $amount, $time, $category, $type )
 	//If the type is to withdraw the cash, make it a negative
 	if($type == UserTransaction::TT_WITHDRAWAL )
 	{
+		debug("Withdraw selected");
+	
 		if( $amount > 0 )
 		{
+			debug( $amount );
 			$amount = amount_negate($amount);
+			debug( $amount );
 		}
+	}
+	else
+	{
+		debug("Addition selected");
 	}
 	
 	$values = array( $user->get_id(), $amount, $time, $category );
@@ -34,7 +45,7 @@ function insert_user_transaction( $amount, $time, $category, $type )
 	$queryDescription = "Insert user_transaction";
 	
 	if( $mysqlConnection->mysql_insert( $query, $values, $queryDescription ) )
-	{
+	{	
 		//Now we need to select out that transaction to get the new id.
 		$added_id = $mysqlConnection->select_most_recent_id( $user->get_id(), "user_transaction");
 
@@ -43,6 +54,8 @@ function insert_user_transaction( $amount, $time, $category, $type )
 		
 		$_SESSION['user'] = $user;
 		
+		
+		debug("returning true");
 		return true;
 	}
 	

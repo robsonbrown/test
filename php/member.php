@@ -55,7 +55,7 @@
 			if( insert_user_transaction( $amount, $time, $category, $type ) )
 			{
 				//debug( 'passed!');
-				echo false;
+				echo true;
 			}
 			else
 			{
