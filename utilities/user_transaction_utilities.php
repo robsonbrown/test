@@ -26,18 +26,12 @@ function insert_user_transaction( $amount, $time, $category, $type )
 	//If the type is to withdraw the cash, make it a negative
 	if($type == UserTransaction::TT_WITHDRAWAL )
 	{
-		debug("Withdraw selected");
-	
 		if( $amount > 0 )
 		{
 			debug( $amount );
 			$amount = amount_negate($amount);
 			debug( $amount );
 		}
-	}
-	else
-	{
-		debug("Addition selected");
 	}
 	
 	$values = array( $user->get_id(), $amount, $time, $category );
@@ -54,8 +48,9 @@ function insert_user_transaction( $amount, $time, $category, $type )
 		
 		$_SESSION['user'] = $user;
 		
+		//Now we're going to update the current finance value
+		$user->update_finance_total( $amount );
 		
-		debug("returning true");
 		return true;
 	}
 	

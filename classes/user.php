@@ -155,11 +155,38 @@ class User
 	}
 	
 	//-----------------------
-	// 
+	//  
 	//------------------------
 	public function get_finance_total()
 	{
 		return $this->finance_total;
+	}
+	
+	//-----------------------
+	// This will update a users finance total adding / removing a new financial amount.
+	//------------------------
+	public function update_finance_total( $amount )
+	{
+		$new_total = $this->finance_total + $amount;
+	
+		//Insert the new user into the database.
+		$mysqlConnection = new Mysql;
+		
+		$column_headers = array( "finance_total" );
+		
+		$values = array( $new_total );
+		
+		$queryDescription = "Update User finance total";
+		
+		if( $mysqlConnection->mysql_update( "user", $column_headers, $values, "ID", $this->get_id(), $queryDescription ) )
+		{		
+			//Updated the local finance total
+			$this->finance_total = $new_total;
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	

@@ -35,7 +35,7 @@
 		//-------------------
 		if( $header == 'addFinance' || $header == 'removeFinance' )
 		{				
-			debug( $header . ' called.');
+			//debug( $header . ' called.');
 		
 			$amount=$_POST['amount']; 
 			$time=$_POST['time']; 

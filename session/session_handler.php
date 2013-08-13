@@ -61,7 +61,7 @@ if(isset( $_POST['head'] ))
 	}
 	else 
 	{
-		debug('Shouldnt be here');
+		debug('Shouldnt have arrived to session handler maybe?');
 	}
 }
 

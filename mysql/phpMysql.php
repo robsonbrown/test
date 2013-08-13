@@ -114,6 +114,43 @@
 			return false;
 		}
 		
+		//-----------------------
+		// Mysql insert queries method.
+		// $table - The table we're going to update
+		// $column_names - An array of column names that are going to be updated
+		// $values - An array of the values they're going to be updated to
+		// $where_id - The id for the where call (for example where user = x)
+		// $where_column - The column that needs to be 
+		// $queryDescription - Description of the 
+		//------------------------
+		public function mysql_update( $table, $column_names, $values, $where_column, $where_id, $queryDescription )
+		{
+			$query = "UPDATE " . $table . " SET ";
+
+			for( $i = 0; $i < count($column_names); $i++ )
+			{
+				$query = $query . " " . $column_names[$i] . "=" . $values[$i];
+					
+				if( $i != ( count($values) -1) )
+				{
+					$query = $query . ", ";
+				}
+				else
+				{
+					$query = $query . " where " . $where_column . "=" . $where_id . ";";
+				}
+			}
+			
+			//debug( $query );
+			
+			if( $this->runMysql( $query, $queryDescription ) )
+			{
+				return true;
+			}
+			
+			return false;
+		}
+		
 		//------------------------
 		// 
 		//------------------------
