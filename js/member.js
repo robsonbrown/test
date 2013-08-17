@@ -33,17 +33,65 @@ $('#funds')
 //-------------------
 // When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
 //--------------------
- $( "#add" )
+ $( "#setTotal" )
       .button()
       .click(function() 
 	  {
+		var bValid = true;
+		tips = $( ".validateTips" );
+	  
+		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+	
+		if( bValid )
+		{
+			var header 		= "setInitialFinance";
+			var mytotal 	= $( "#amount" ).val();
+			
+			$.ajax({
+			type: "POST",
+			url: "/php/member.php",
+			data: {head:header, total:mytotal}
+			}).done(function( result ) 
+			{				
+				if( result == false )
+				{
+					alert("The transaction could not be undertaken, please contact an administrator.");
+				}
+				else if( result == true )
+				{
+					location.reload();
+				}
+				else
+				{
+					alert( "Shouldn't be here" );
+				}
+			});
+			
+		}
+		else
+		{
+		
+		}
+		
+	  });
+	  
+	  
+//-------------------
+// When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
+//--------------------
+ $( "#addFinance" )
+      .button()
+      .click(function() 
+	  {
+		alert("here");
+	  
 		var bValid = true;
 		
 		tips = $( ".validateTips" );
 	  
 		//Check that the values 
 		bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
-		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Password field only allow : 0-9" );
+		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
 		
 		bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
 		bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );

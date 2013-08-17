@@ -8,7 +8,7 @@
 	{
 		protected $host		="localhost"; // Host name 
 		protected $username	="root"; // Mysql username 
-		protected $password	=""; // Mysql password 
+		protected $password	="root"; // Mysql password 
 		protected $db_name	="financeDB"; // Database name 
 		//$tbl_name	="members"; // Table name
 	

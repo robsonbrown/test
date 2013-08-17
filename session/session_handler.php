@@ -22,12 +22,6 @@ if(isset( $_POST['head'] ))
 		$username=$_POST['username']; 
 		$password=$_POST['password']; 
 		
-		// To protect MySQL injection (more detail about MySQL injection)
-		$username = stripslashes($username);
-		$password = stripslashes($password);
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-		
 		$user = new User();
 		
 		if( $user->login_user( $username, $password ) )

@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<body>
-		<form name="logout" method="post" >
-			<input type="submit" name="logout" value="logout">
-		</form>
-		
-		<div id="funds" >
-		</div>
+	<body>		
+		<div id="top-menu">
+			<form name="logout" method="post" >
+				<input type="submit" name="logout" value="logout">
+			</form>
+			
+			<div id="funds" >
+			</div>
+			
+			<div id="funds-entrance">
+					<table width="100" border="0" align="left" cellpadding="0" cellspacing="1">
+						<tr>
+							<form name="financeBox" method="post" action="/php/member.php">
+							
+							<td width="78">Finance Total :</td>
+							<td width="6">:</td>
+							<td width="294"><input name="financeTotal" type="text" id="amount"></td>
+							<td width "100"><input id="setTotal" name="updateTotal" value="Set"></td>
+						</tr>						
+						</form>
+					</table>
+			</div>
+		</div>	
 	
 		<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
@@ -35,7 +51,7 @@
 				<tr>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-				<td><input id="add" name="addFinance" value="Add"></td>
+				<td><input id="addFinance" name="addFinance" value="Add"></td>
 				</tr>
 				</table>
 				</td>

@@ -32,7 +32,7 @@ function createDatabaseTables( $mysqlConnection )
 function createUserTable( $mysqlConnection )
 {
 	// Create table User
-	$sql="CREATE TABLE user(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_name VARCHAR(30), name VARCHAR(50), password VARCHAR(100), finance_total DECIMAL(6,2), email_address VARCHAR(50) )";
+	$sql="CREATE TABLE user(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_name VARCHAR(30), name VARCHAR(50), password VARCHAR(100), finance_total DECIMAL(6,2), email_address VARCHAR(50), full_setup tinyint )";
 	$mysqlConnection->mysql_create( $sql, "User table creation" );
 }
 

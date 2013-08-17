@@ -31,9 +31,30 @@
 		$header = $_POST['head'];
 	
 		//-------------------
+		// Post function for the set initial funds total option
+		//-------------------
+		if( $header == 'setInitialFinance' )
+		{
+			$total=$_POST['total']; 
+			
+			$user = $_SESSION['user'];
+			
+			if( $user->complete_full_setup( $total ) )
+			{
+				//debug( 'passed!');
+				echo true;
+			}
+			else
+			{
+				echo false;
+			}
+			
+		}
+	
+		//-------------------
 		// Post function for the add transaction option
 		//-------------------
-		if( $header == 'addFinance' || $header == 'removeFinance' )
+		else if( $header == 'addFinance' || $header == 'removeFinance' )
 		{				
 			//debug( $header . ' called.');
 		

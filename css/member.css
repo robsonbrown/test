@@ -3,6 +3,19 @@ body{
 	font-size: 10px;
 }
 
+#top-menu
+{
+	height:30px;
+	width:100%;
+	background-color:#FFFE36;
+}
+
+#funds
+{
+	width:100%;
+}
+
+
 /* error message */
 .error {
   /* supply height to ensure consistent positioning for every browser */

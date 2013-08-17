@@ -8,7 +8,7 @@ class User
 	//-----------------------
 	// 
 	//------------------------
-    public function set_user( $id_in, $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in ) {
+    public function set_user( $id_in, $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in, $full_setup_in ) {
         
 		$this->id 				= $id_in;
 		$this->user_name 		= $user_name_in;
@@ -16,6 +16,7 @@ class User
 		$this->password 		= $password_in;
 		$this->finance_total 	= $finance_total_in;
 		$this->email_address  	= $email_address_in;
+		$this->full_setup		= $full_setup_in;
     }
 	
 	//-----------------------
@@ -23,13 +24,13 @@ class User
 	//------------------------
 	public function login_user( $user_name_in, $password_in )
 	{
+		$mysqlConnection = new Mysql;
+		
 		//sql injection checks
 		$user_name_in 	= stripslashes($user_name_in);
 		$password_in 	= stripslashes($password_in);
-		$user_name_in 	= mysql_real_escape_string($user_name_in);
-		$password_in 	= mysql_real_escape_string($password_in);
-
-		$mysqlConnection = new Mysql;
+		//$user_name_in 	= mysql_real_escape_string($user_name_in);
+		//$password_in 	= mysql_real_escape_string($password_in);
 		
 		//Add the core user information
 		$query = "select * from user where user_name = '" . $user_name_in . "' and password = '" . md5($password_in) . "'";
@@ -40,7 +41,7 @@ class User
 		}
 		
 		$row = mysqli_fetch_array($result);
-		$this->set_user( $row['ID'], $row['user_name'], $row['name'], $row['password'], $row['finance_total'], $row['email_address'] );
+		$this->set_user( $row['ID'], $row['user_name'], $row['name'], $row['password'], $row['finance_total'], $row['email_address'], $row['full_setup'] );
 		
 		
 		//Now add in the user transactions.  TODO: This may need to be split out
@@ -81,9 +82,9 @@ class User
 		//Insert the new user into the database.
 		$mysqlConnection = new Mysql;
 		
-		$query = "INSERT INTO user (user_name, name, password, finance_total, email_address) ";
+		$query = "INSERT INTO user (user_name, name, password, finance_total, email_address, full_setup) ";
 		
-		$values = array( $this->user_name, $this->name, $this->password, $this->finance_total, $this->email_address );
+		$values = array( $this->user_name, $this->name, $this->password, $this->finance_total, $this->email_address, 0 );
 		
 		$queryDescription = "Insert User";
 		
@@ -163,6 +164,42 @@ class User
 	}
 	
 	//-----------------------
+	//  
+	//------------------------
+	public function get_full_setup()
+	{
+		return $this->full_setup;
+	}
+	
+	//-----------------------
+	//  
+	//------------------------
+	public function complete_full_setup( $new_finance_total )
+	{
+		if( !$this->full_setup )
+		{
+			//Insert the new user into the database.
+			$mysqlConnection = new Mysql;
+			
+			$column_headers = array( "finance_total", "full_setup" );
+			$values = array( $new_finance_total, true );
+			
+			$queryDescription = "User full setup";
+			
+			if( $mysqlConnection->mysql_update( "user", $column_headers, $values, "ID", $this->get_id(), $queryDescription ) )
+			{				
+				//Updated the local finance total
+				$this->finance_total = $new_finance_total;
+				$this->full_setup = true;
+				
+				return true;
+			}
+			
+			return false;
+		}
+	}
+	
+	//-----------------------
 	// This will update a users finance total adding / removing a new financial amount.
 	//------------------------
 	public function update_finance_total( $amount )
@@ -197,6 +234,7 @@ class User
 	protected $password 	 			= '';
 	protected $finance_total 			= 0;
 	protected $email_address 			= '';
+	protected $full_setup				= 0;
 	
 	protected $user_transactions 		= array();
 	protected $user_direct_debits 		= array();
