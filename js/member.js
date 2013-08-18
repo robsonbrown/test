@@ -5,7 +5,7 @@ check.setAttribute("type", "date");
 
 
 //-------------------
-// Gets the current amount of funds for the current user
+// Sets up the member page initially - Gets the current amount of funds for the current user
 //--------------------
 $('#funds')
 .text
@@ -27,6 +27,7 @@ $('#funds')
 				if( result.full_setup == true )
 				{					
 					$("#funds-entrance").hide();
+					$("#transactionPopup").hide();
 					$("#funds").show();
 
 					funds_value = result.finance_total;
@@ -35,6 +36,7 @@ $('#funds')
 				{
 					$("#funds-entrance").show();
 					$("#funds").hide();
+					$("#transactionPopup").hide();
 					
 					return false;
 				}
@@ -43,6 +45,54 @@ $('#funds')
 			return funds_value;			
 	}   
 );
+
+//-------------------
+// Logout button call
+//--------------------
+  $( "#logout" )
+      .button()
+      .click(function() 
+	  {		
+		var header 		= "logout";
+		
+		$.ajax({
+		type: "POST",
+		url: "/session/session_handler.php",
+		data: {head:header}
+		}).done(function( result ) 
+		{				
+			location = "/index.php";
+		});	
+	  }
+	);
+
+//-------------------
+// Add finance opening button call.
+//--------------------
+  $( "#addFunds" )
+      .button()
+      .click(function() 
+	  {		
+		$("#transactionPopup").show();
+		$("#addFunds" ).button("disable");
+		$("#withdrawFunds" ).button("enable");
+	  }
+	);
+	
+//-------------------
+// Add finance opening button call.
+//--------------------
+  $( "#withdrawFunds" )
+      .button()
+      .click(function() 
+	  {		
+		$("#transactionPopup").show();
+		$("#addFunds" ).button("enable");
+		$("#withdrawFunds" ).button("disable");
+	  }
+	);
+	  
+
 
 //-------------------
 // When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
@@ -54,12 +104,12 @@ $('#funds')
 		var bValid = true;
 		tips = $( ".validateTips" );
 	    
-		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+		bValid = bValid && checkRegexp( $( "#financeTotal" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
 	    
 		if( bValid )
 		{
 			var header 		= "setInitialFinance";
-			var mytotal 	= $( "#amount" ).val();
+			var mytotal 	= $( "#financeTotal" ).val();
 			
 			$.ajax({
 			type: "POST",
@@ -93,8 +143,6 @@ $('#funds')
       .button()
       .click(function() 
 	  {
-		alert("here");
-	  
 		var bValid = true;
 		
 		tips = $( ".validateTips" );
@@ -108,17 +156,27 @@ $('#funds')
 	  
 		if ( bValid ) 
 		{	
-			var header 		= "addFinance";
+			var header = "";
+		
+			if( $("#addFunds").is(":disabled") )
+			{
+				header	= "addFinance";
+			}
+			else
+			{
+				header	= "removeFinance";
+			}
+
 			var myamount 	= $( "#amount" ).val();
 			var	mytime 		= $( "#time" ).val();
 			var mycategory  = $( "#category" ).val();
-		
+			
 			$.ajax({
 			type: "POST",
 			url: "/php/member.php",
 			data: {head:header, amount:myamount, time:mytime, category:mycategory}
 			}).done(function( result ) 
-			{				
+			{						
 				if( result == false )
 				{
 					alert("The transaction could not be undertaken, please contact an administrator.");

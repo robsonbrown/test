@@ -11,7 +11,7 @@ if(!isset($_SESSION))
 if(isset( $_POST['head'] )) 
 {
 	$header = $_POST['head'];
-
+	
 	PhpConsole::start(true, true, dirname(__FILE__));
 
 	if( $header == 'login' )
@@ -53,22 +53,17 @@ if(isset( $_POST['head'] ))
 		$user->set_user( -1, $username, $name, md5($password), $finance, $email );
 		$user->create_new_user();
 	}
+	else if( $header == 'logout' )
+	{
+		debug("logout called");
+		// Check to see if the logout button has been pressed.
+		session_destroy();
+		check_session_state();
+	}
 	else 
 	{
 		debug('Shouldnt have arrived to session handler maybe?');
 	}
-}
-
-//if( ! isset($_SESSION['user']) )
-//{
-//
-
-//}
-if (isset($_POST['logout'])) 
-{
-	// Check to see if the logout button has been pressed.
-	session_destroy();
-	header("location:/index.php");
 }
 
 //------------------------

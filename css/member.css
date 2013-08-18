@@ -5,9 +5,10 @@ body{
 
 #top-menu
 {
-	height:30px;
+	height:50px;
 	width:100%;
-	background-color:#FFFE36;
+	background-color:#009900;
+	color:white;
 }
 
 #funds

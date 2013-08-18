@@ -18,6 +18,8 @@
 	{
 		$user = $_SESSION['user'];
 		
+		check_session_state();
+		
 		$json = json_encode(array( 'finance_total' => $user->get_finance_total(), 'full_setup' => $user->get_full_setup() ) );
 		
 		echo $json;
@@ -29,7 +31,7 @@
 	if(isset( $_POST['head'] )) 
 	{
 		$header = $_POST['head'];
-	
+		
 		//-------------------
 		// Post function for the set initial funds total option
 		//-------------------
@@ -50,13 +52,12 @@
 			}
 			
 		}
-	
 		//-------------------
 		// Post function for the add transaction option
 		//-------------------
 		else if( $header == 'addFinance' || $header == 'removeFinance' )
 		{				
-			//debug( $header . ' called.');
+			debug( $header . ' called.');
 		
 			$amount=$_POST['amount']; 
 			$time=$_POST['time']; 
