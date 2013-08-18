@@ -86,6 +86,7 @@ function check_session_state()
 	}
 	else
 	{
+		debug( 'reloading' );
 		header("location:/index.php");
 	}
 }

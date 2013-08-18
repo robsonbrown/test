@@ -86,6 +86,6 @@
 		}
 	}
 
-	//check_session_state();
+	check_session_state();
 ?>
 
