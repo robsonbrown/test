@@ -67,6 +67,51 @@
 				</tr>
 			</table>
 		</div>
+		
+		
+		<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>Last Name</th> 
+    <th>First Name</th> 
+    <th>Email</th> 
+    <th>Due</th> 
+    <th>Web Site</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>Smith</td> 
+    <td>John</td> 
+    <td>jsmith@gmail.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.jsmith.com</td> 
+</tr> 
+<tr> 
+    <td>Bach</td> 
+    <td>Frank</td> 
+    <td>fbach@yahoo.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.frank.com</td> 
+</tr> 
+<tr> 
+    <td>Doe</td> 
+    <td>Jason</td> 
+    <td>jdoe@hotmail.com</td> 
+    <td>$100.00</td> 
+    <td>http://www.jdoe.com</td> 
+</tr> 
+<tr> 
+    <td>Conway</td> 
+    <td>Tim</td> 
+    <td>tconway@earthlink.net</td> 
+    <td>$50.00</td> 
+    <td>http://www.timconway.com</td> 
+</tr> 
+</tbody> 
+</table> 
+		
+		
 	</body>
 </html>
 
@@ -75,6 +120,7 @@ include '/php/member.php';
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.10.3.custom.css">
+<link rel="stylesheet" type="text/css" href="css/table/blue/style.css">
 <link rel="stylesheet" type="text/css" href="css/member.css">
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
@@ -82,3 +128,4 @@ include '/php/member.php';
 <script type="text/javascript" src="js/member.js"></script>
 <script type="text/javascript" src="js/list_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 

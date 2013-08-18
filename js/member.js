@@ -4,6 +4,12 @@ var check = document.createElement("input");
 check.setAttribute("type", "date");
 
 
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
+    } 
+); 
+
 //-------------------
 // Sets up the member page initially - Gets the current amount of funds for the current user
 //--------------------
