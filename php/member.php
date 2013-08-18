@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/utilities/user_transaction_utilities.php');

@@ -1,4 +1,4 @@
-
+﻿
 //Check that the datePicker type can be used with this browser type.
 var check = document.createElement("input");
 check.setAttribute("type", "date");
@@ -42,7 +42,9 @@ $('#funds')
 				}
 			});
 			
-			return funds_value;			
+			var total_value = 'Current Budget : £' + funds_value;
+			
+			return total_value;			
 	}   
 );
 

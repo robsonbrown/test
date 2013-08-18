@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<body>		
 		<div id="top-menu">
 			<div id="funds" >
@@ -19,9 +20,14 @@
 					</table>
 			</div>
 		
+			<div id="top-buttons">
 				<input type="submit" id="logout" name="logout" value="logout">
-				<input type="submit" id="addFunds" name="addFunds" value="Add Funds">
-				<input type="submit" id="withdrawFunds" name="withdrawFunds" value="Withdraw Funds">
+				
+				<div id="main-buttons">
+					<input type="submit" id="addFunds" name="addFunds" value="Add Funds">
+					<input type="submit" id="withdrawFunds" name="withdrawFunds" value="Withdraw Funds">
+				</div>
+			</div>
 		</div>	
 	
 		

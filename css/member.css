@@ -11,9 +11,26 @@ body{
 	color:white;
 }
 
+#top-buttons
+{
+	position:absolute;
+	top:18px;
+	left:2%;
+	width:500px;
+}
+
+#main-buttons
+{
+	position:absolute;
+	top:0px;
+	left:50%;
+}
+
 #funds
 {
-	width:100%;
+	position:absolute;
+	right:1%;
+	font-size:40px;
 }
 
 
