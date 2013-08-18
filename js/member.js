@@ -22,11 +22,25 @@ $('#funds')
 		}).success(
 			function( result ) 
 			{			
-				funds_value = result;
-				return result;
+				result = jQuery.parseJSON(result);
+				
+				if( result.full_setup == true )
+				{					
+					$("#funds-entrance").hide();
+					$("#funds").show();
+
+					funds_value = result.finance_total;
+				}
+				else
+				{
+					$("#funds-entrance").show();
+					$("#funds").hide();
+					
+					return false;
+				}
 			});
 			
-			return funds_value;
+			return funds_value;			
 	}   
 );
 
@@ -36,12 +50,12 @@ $('#funds')
  $( "#setTotal" )
       .button()
       .click(function() 
-	  {
+	  {		
 		var bValid = true;
 		tips = $( ".validateTips" );
-	  
+	    
 		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
-	
+	    
 		if( bValid )
 		{
 			var header 		= "setInitialFinance";
@@ -59,20 +73,16 @@ $('#funds')
 				}
 				else if( result == true )
 				{
+					$("#funds-entrance").hide();
+					$("#funds").show();
 					location.reload();
 				}
 				else
 				{
 					alert( "Shouldn't be here" );
 				}
-			});
-			
+			});	
 		}
-		else
-		{
-		
-		}
-		
 	  });
 	  
 	  

@@ -18,9 +18,9 @@
 	{
 		$user = $_SESSION['user'];
 		
-		debug( $user->get_finance_total() );
+		$json = json_encode(array( 'finance_total' => $user->get_finance_total(), 'full_setup' => $user->get_full_setup() ) );
 		
-		echo $user->get_finance_total();
+		echo $json;
 	}
 	
 	//-------------------
@@ -38,7 +38,7 @@
 			$total=$_POST['total']; 
 			
 			$user = $_SESSION['user'];
-			
+		
 			if( $user->complete_full_setup( $total ) )
 			{
 				//debug( 'passed!');
