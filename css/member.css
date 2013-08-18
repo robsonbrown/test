@@ -33,6 +33,13 @@ body{
 	font-size:40px;
 }
 
+#transactionPopup
+{
+	position:absolute;
+	top:20%;
+	left:40%;
+}
+
 
 /* error message */
 .error {
