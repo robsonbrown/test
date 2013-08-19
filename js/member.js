@@ -144,6 +144,16 @@ $('#funds')
 	  });
 	  
 	  
+//
+$( "#cancelFinance" )
+	.button()
+	.click(function()
+	{
+		$("#transactionPopup").hide();
+		$("#addFunds" ).button("enable");
+		$("#withdrawFunds" ).button("enable");
+	});
+	  
 //-------------------
 // When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
 //--------------------

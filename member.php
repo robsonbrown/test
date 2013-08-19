@@ -59,6 +59,7 @@
 						<tr>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
+						<td><input id="cancelFinance" name="cancelFinance" value="Cancel"></td>
 						<td><input id="addFinance" name="addFinance" value="Add"></td>
 						</tr>
 						</table>
