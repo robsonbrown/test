@@ -1,6 +1,6 @@
 <?php
 
-class UserTransaction
+class UserTransaction implements JsonSerializable
 {	
 	//Transaction types
 	const TT_WITHDRAWAL = 1;
@@ -42,12 +42,24 @@ class UserTransaction
 		return $this->id;
 	}
 	
+	public function jsonSerialize() 
+	{
+        return [
+            'id' 		=> $this->id,
+            'user_id' 	=> $this->user_id,
+            'amount' 	=> $this->amount,
+			'time' 		=> $this->time,
+			'category' 	=> $this->category
+        ];
+    }
+	
+	
 	// property declaration
-	protected $id 			 = 0;
-	protected $user_id	 	 = 0;
-	protected $amount	 	 = 0;
-	protected $time		 	 = "";
-	protected $category	 	 = 0;
+	private $id 			 = 0;
+	private $user_id	 	 = 0;
+	private $amount	 	 	 = 0;
+	private $time		 	 = "";
+	private $category	 	 = 0;
 }
 
 ?>

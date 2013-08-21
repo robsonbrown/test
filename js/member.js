@@ -144,7 +144,9 @@ $('#funds')
 	  });
 	  
 	  
-//
+//-------------------
+// Cancel finance button called.
+//--------------------
 $( "#cancelFinance" )
 	.button()
 	.click(function()
@@ -215,9 +217,6 @@ $( "#cancelFinance" )
 		}
 	  });
 	  
-
-
-
 //-------------------
 // Checks that HTML5 can be used in the browser for the calendar picker.
 //--------------------
@@ -242,3 +241,56 @@ if(check.type === "text"){
         input.hide();
     });
 }
+
+
+
+$(document).ready(function() { 
+	 $("table").tablesorter({ 
+        // enable debug mode 
+        debug: true 
+    }); 
+	
+	var rows;
+		
+	$.ajax
+		({
+		type: "GET",
+		url: "/php/member.php",
+		async: false,
+		data: "listPanel"
+		}).success(
+			function( result ) 
+			{			
+				result = jQuery.parseJSON(result);
+				rows = result;
+			});
+	$i=0; 
+	
+	while ($i < rows.length)
+	{	
+		//alert( rows[$i].id + " " + rows[$i].user_id + " " + rows[$i].amount + " " + rows[$i].time + " " + rows[$i].category    );
+		var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
+
+		$("table tbody").append(html);
+	
+		$i++;
+	}	
+	
+	$("table").trigger("update");
+	
+    //$("#append").click(function() { 
+    //   // add some html 
+    //   var html = "<tr><td>Peter</td><td>Parker</td><td>28</td><td>$9.99</td><td>20%</td><td>Jul 6, 2006 8:14 AM</td></tr>"; 
+    //   html += "<tr><td>John</td><td>Hood</td><td>33</td><td>$19.99</td><td>25%</td><td>Dec 10, 2002 5:14 AM</td></tr><tr><td>Clark</td><td>Kent</td><td>18</td><td>$15.89</td><td>44%</td><td>Jan 12, 2003 11:14 AM</td></tr>";         
+    //   html += "<tr><td>Bruce</td><td>Almighty</td><td>45</td><td>$153.19</td><td>44%</td><td>Jan 18, 2001 9:12 AM</td></tr>"; 
+    //   // append new html to table body  
+    //    $("table tbody").append(html); 
+    //   // let the plugin know that we made a update 
+    //   $("table").trigger("update"); 
+    //   // set sorting column and direction, this will sort on the first and third column 
+    //   var sorting = [[2,1],[0,0]]; 
+    //   // sort on the first column 
+    //   $("table").trigger("sorton",[sorting]); 	
+    //   return false; 
+   // }); 
+});

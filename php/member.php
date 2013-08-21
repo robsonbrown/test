@@ -26,6 +26,19 @@
 	}
 	
 	//-------------------
+	// Loads the list Panel for the members page (default view)
+	//--------------------
+	if(isset( $_GET['listPanel'] ))
+	{
+		$user = $_SESSION['user'];
+		check_session_state();
+
+		$transactions = $user->get_user_transactions();
+		$json = json_encode( $user->get_user_transactions() );
+		
+		echo $json;
+	}
+	//-------------------
 	// Post back functions
 	//--------------------
 	if(isset( $_POST['head'] )) 

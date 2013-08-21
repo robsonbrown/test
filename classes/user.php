@@ -10,13 +10,13 @@ class User
 	//------------------------
     public function set_user( $id_in, $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in, $full_setup_in ) {
         
-		$this->id 				= $id_in;
-		$this->user_name 		= $user_name_in;
-		$this->name		 		= $name_in;
-		$this->password 		= $password_in;
-		$this->finance_total 	= $finance_total_in;
-		$this->email_address  	= $email_address_in;
-		$this->full_setup		= $full_setup_in;
+		$this->id 					= $id_in;
+		$this->user_name 			= $user_name_in;
+		$this->name		 			= $name_in;
+		$this->password 			= $password_in;
+		$this->finance_total 		= $finance_total_in;
+		$this->email_address  		= $email_address_in;
+		$this->full_setup			= $full_setup_in;
     }
 	
 	//-----------------------
@@ -54,22 +54,22 @@ class User
 		
 		while( $row = mysqli_fetch_array($result) )
 		{
-			$this->add_user_transaction( $row['ID'], $row['user_id'], $row['amount'], $row['time'], $row['category'] );
+			$this->add_user_transaction( $row['ID'], $row['amount'], $row['time'], $row['category'] );
 		}
 		
 		
 		//Now add the direct debits
-		$query = "select * from user_direct_debit where user_id = " . $this->id;
+		//$query = "select * from user_direct_debit where user_id = " . $this->id;
+		//
+		//if( !$mysqlConnection->mysql_select( $query, "user_direct_debit select", 0, $result ) )
+		//{
+		//	return false;
+		//}
 		
-		if( !$mysqlConnection->mysql_select( $query, "user_direct_debit select", 0, $result ) )
-		{
-			return false;
-		}
-		
-		while( $row = mysqli_fetch_array($result) )
-		{
-			$this->add_user_transaction( $row['ID'], $row['user_id'], $row['amount'], $row['time'], $row['category'] );
-		}
+		//while( $row = mysqli_fetch_array($result) )
+		//{
+		//	$this->add_user_transaction( $row['ID'], $row['user_id'], $row['amount'], $row['time'], $row['category'] );
+		//}
 		
 		return true;
 	}
@@ -109,6 +109,7 @@ class User
 	//------------------------
 	public function add_user_transaction( $id_in, $amount_in, $time_in, $category_in )
 	{
+		//debug( $id_in . " id ended " . $amount_in . " amount ended " . $time_in . " time ended " . $category_in . " category ended" );
 		$transaction = new UserTransaction;
 		$transaction->set_user_transaction( $id_in, $this->get_id(), $amount_in, $time_in, $category_in );
 		
@@ -120,7 +121,7 @@ class User
 	//------------------------
 	public function get_user_transactions()
 	{
-		return $user_transactions;
+		return $this->user_transactions;
 	}
 	
 	//-----------------------
