@@ -265,7 +265,7 @@ $(document).ready(function() {
 		$i++;
 	}	
 	
-	$("#testTable").trigger("update");
+	$("#transactionsList").trigger("update");
 	
     //$("#append").click(function() { 
     //   // add some html 
