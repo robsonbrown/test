@@ -3,13 +3,6 @@
 var check = document.createElement("input");
 check.setAttribute("type", "date");
 
-
-$(document).ready(function() 
-    { 
-        $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
-    } 
-); 
-
 //-------------------
 // Sets up the member page initially - Gets the current amount of funds for the current user
 //--------------------
@@ -245,10 +238,7 @@ if(check.type === "text"){
 
 
 $(document).ready(function() { 
-	 $("table").tablesorter({ 
-        // enable debug mode 
-        debug: true 
-    }); 
+	$("#transactionsList").tablesorter();
 	
 	var rows;
 		
@@ -259,24 +249,23 @@ $(document).ready(function() {
 		async: false,
 		data: "listPanel"
 		}).success(
-			function( result ) 
+			function( tableResult ) 
 			{			
-				result = jQuery.parseJSON(result);
-				rows = result;
+				tableResult = jQuery.parseJSON(tableResult);
+				rows = tableResult;
 			});
 	$i=0; 
 	
-	while ($i < rows.length)
+	while( $i < rows.length )
 	{	
-		//alert( rows[$i].id + " " + rows[$i].user_id + " " + rows[$i].amount + " " + rows[$i].time + " " + rows[$i].category    );
 		var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
 
-		$("table tbody").append(html);
+		$("#transactionsList tbody").append(html);
 	
 		$i++;
 	}	
 	
-	$("table").trigger("update");
+	$("#testTable").trigger("update");
 	
     //$("#append").click(function() { 
     //   // add some html 
