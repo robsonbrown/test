@@ -268,8 +268,10 @@ if(check.type === "text"){
 // Loads the table on the screen
 //--------------------
 $(document).ready(function() { 
-	$("#transactionsList").tablesorter();	
-	load_list_information();
+	$("#transactionsList").tablesorter();
+	
+	load_list_information( "/php/member.php", "listPanel", "transactionsList" );
+	
     //$("#append").click(function() { 
     //   // add some html 
     //   var html = "<tr><td>Peter</td><td>Parker</td><td>28</td><td>$9.99</td><td>20%</td><td>Jul 6, 2006 8:14 AM</td></tr>"; 

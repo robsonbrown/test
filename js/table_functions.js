@@ -1,29 +1,27 @@
 
+//if( $("#manageDirectDebit").is(":disabled") )
+//{
+//	header	= "manageDirectDebit";
+//	alert('hello');
+//}
+//else
+//{
+//	header	= "listPanel";
+//}
+
 //-------------------
-// Table functions
+// Load a tableSorted List panel.
 //--------------------
-function load_list_information()
+function load_list_information( $urlName, $header, $listPanelName )
 {
 	var rows;
-		
-	var header = "";
-		
-	if( $("#manageDirectDebit").is(":disabled") )
-	{
-		header	= "manageDirectDebit";
-		alert('hello');
-	}
-	else
-	{
-		header	= "listPanel";
-	}
-		
+	
 	$.ajax
 		({
 		type: "GET",
-		url: "/php/member.php",
+		url: $urlName,
 		async: false,
-		data: header
+		data: $header
 		}).success(
 			function( tableResult ) 
 			{			
@@ -36,11 +34,11 @@ function load_list_information()
 	{	
 		var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
 
-		$("#transactionsList tbody").append(html);
+		$("#" + $listPanelName + " tbody").append(html);
 	
 		$i++;
 	}	
 	
-	$("#transactionsList").trigger("update");
+	$("#" + $listPanelName ).trigger("update");
 
 }
