@@ -270,7 +270,7 @@ if(check.type === "text"){
 $(document).ready(function() { 
 	$("#transactionsList").tablesorter();
 	
-	load_list_information( "/php/member.php", "listPanel", "transactionsList" );
+	load_list_information( "/php/member.php", "transactionsListPanel", "transactionsList" );
 	
     //$("#append").click(function() { 
     //   // add some html 

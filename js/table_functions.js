@@ -32,13 +32,54 @@ function load_list_information( $urlName, $header, $listPanelName )
 	
 	while( $i < rows.length )
 	{	
-		var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
+		//var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
 
+		$columns = get_columns_for_table( $header, rows );
+		
+		var html = create_html_for_row( $columns );
+		
 		$("#" + $listPanelName + " tbody").append(html);
 	
 		$i++;
 	}	
 	
 	$("#" + $listPanelName ).trigger("update");
-
 }
+
+//-------------------
+// Create a HTML styled table row, with just the column names.
+//--------------------
+function create_html_for_row( $columns_to_add )
+{
+	var html = "<tr>";
+	
+	for( $j=0; $j != $columns_to_add.length; ++$j )
+	{
+		html += "<td>" + $columns_to_add[$j] + "</td>";
+	}
+	
+	html += "</tr>";
+	
+	return html;
+}
+
+
+//-------------------
+// Create a HTML styled table row, with just the column names.
+//--------------------
+function get_columns_for_table( $header, rows )
+{
+	switch( $header ) 
+	{
+		case "transactionsListPanel":
+		{
+			return [ rows[$i].time, rows[$i].category, rows[$i].amount ];
+		}
+		break;
+		
+		default:
+		break;
+	}
+}
+
+

@@ -28,7 +28,7 @@
 	//-------------------
 	// Loads the list Panel for the members page (default view)
 	//--------------------
-	if(isset( $_GET['listPanel'] ))
+	if(isset( $_GET['transactionsListPanel'] ))
 	{
 		$user = $_SESSION['user'];
 		check_session_state();
