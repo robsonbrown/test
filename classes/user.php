@@ -2,6 +2,7 @@
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/mysql/phpMysql.php');
 include_once( 'user_transaction.php' );
+include_once( 'user_direct_debit.php' );
 
 class User
 {	
@@ -59,19 +60,31 @@ class User
 		
 		
 		//Now add the direct debits
-		//$query = "select * from user_direct_debit where user_id = " . $this->id;
-		//
-		//if( !$mysqlConnection->mysql_select( $query, "user_direct_debit select", 0, $result ) )
-		//{
-		//	return false;
-		//}
+		$query = "select * from user_direct_debit where user_id = " . $this->id;
 		
-		//while( $row = mysqli_fetch_array($result) )
-		//{
-		//	$this->add_user_transaction( $row['ID'], $row['user_id'], $row['amount'], $row['time'], $row['category'] );
-		//}
+		if( !$mysqlConnection->mysql_select( $query, "user_direct_debit select", 0, $result ) )
+		{
+			return false;
+		}
+		
+		while( $row = mysqli_fetch_array($result) )
+		{
+			$this->add_direct_debit( $row['ID'], $row['amount'], $row['start_date'], $row['recourrance_type'], $row['end_date'], $row['category'] );
+		}
 		
 		return true;
+	}
+	
+	//-----------------------
+	// 
+	//------------------------
+	public function add_direct_debit( $id_in, $amount_in, $start_date_in, $reocurrance_type_in, $end_date_in, $category_in )
+	{		
+		$transaction = new UserDirectDebit;
+		
+		$transaction->set_user_direct_debit( $id_in, $this->get_id(), $amount_in, $start_date_in, $reocurrance_type_in, $end_date_in, $category_in );
+		
+		array_push($this->user_direct_debits, $transaction);
 	}
 
 	//-----------------------

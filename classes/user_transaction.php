@@ -42,6 +42,9 @@ class UserTransaction implements JsonSerializable
 		return $this->id;
 	}
 	
+	//-----------------------
+	// 
+	//------------------------
 	public function jsonSerialize() 
 	{
         return [

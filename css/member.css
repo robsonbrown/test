@@ -25,14 +25,15 @@ body{
 	position:absolute;
 	top:18px;
 	left:2%;
-	width:500px;
+	width:10%;
 }
 
 #main-buttons
 {
 	position:absolute;
 	top:0px;
-	left:50%;
+	left:100px;
+	width:500px;
 }
 
 #funds

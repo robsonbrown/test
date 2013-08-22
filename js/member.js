@@ -77,6 +77,7 @@ $('#funds')
 		$("#transactionPopup").show();
 		$("#addFunds" ).button("disable");
 		$("#withdrawFunds" ).button("enable");
+		$("#manageDirectDebit" ).button("enable");
 	  }
 	);
 	
@@ -87,9 +88,36 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$("#transactionPopup").show();
+		$("#transactionPopup").show();		
 		$("#addFunds" ).button("enable");
 		$("#withdrawFunds" ).button("disable");
+		$("#manageDirectDebit" ).button("enable");
+	  }
+	);
+	
+//-------------------
+// Open Direct Debit Management
+//--------------------
+  $( "#manageDirectDebit" )
+      .button()
+      .click(function() 
+	  {		
+		$("#addFunds" ).button("enable");
+		$("#withdrawFunds" ).button("enable");
+		$("#manageDirectDebit" ).button("disable");
+	  }
+	);
+	
+//-------------------
+// Manage targets Button
+//--------------------
+  $( "#manageTargets" )
+      .button()
+      .click(function() 
+	  {		
+		//$("#addFunds" ).button("enable");
+		//$("#withdrawFunds" ).button("enable");
+		//$("#manageDirectDebit" ).button("disable");
 	  }
 	);
 	  
@@ -236,37 +264,12 @@ if(check.type === "text"){
 }
 
 
-
+//-------------------
+// Loads the table on the screen
+//--------------------
 $(document).ready(function() { 
-	$("#transactionsList").tablesorter();
-	
-	var rows;
-		
-	$.ajax
-		({
-		type: "GET",
-		url: "/php/member.php",
-		async: false,
-		data: "listPanel"
-		}).success(
-			function( tableResult ) 
-			{			
-				tableResult = jQuery.parseJSON(tableResult);
-				rows = tableResult;
-			});
-	$i=0; 
-	
-	while( $i < rows.length )
-	{	
-		var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
-
-		$("#transactionsList tbody").append(html);
-	
-		$i++;
-	}	
-	
-	$("#transactionsList").trigger("update");
-	
+	$("#transactionsList").tablesorter();	
+	load_list_information();
     //$("#append").click(function() { 
     //   // add some html 
     //   var html = "<tr><td>Peter</td><td>Parker</td><td>28</td><td>$9.99</td><td>20%</td><td>Jul 6, 2006 8:14 AM</td></tr>"; 

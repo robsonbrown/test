@@ -26,6 +26,8 @@
 				<div id="main-buttons">
 					<input type="submit" id="addFunds" name="addFunds" value="Add Funds">
 					<input type="submit" id="withdrawFunds" name="withdrawFunds" value="Withdraw Funds">
+					<input type="submit" id="manageDirectDebit" name="manageDirectDebit" value="Direct Debits">
+					<input type="submit" id="manageTargets" name="manageTargets" value="Targets">
 				</div>
 			</div>
 		</div>	
@@ -103,5 +105,6 @@ include '/php/member.php';
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
 <script type="text/javascript" src="js/list_functions.js"></script>
+<script type="text/javascript" src="js/table_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
