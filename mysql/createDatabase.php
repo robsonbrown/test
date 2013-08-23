@@ -52,7 +52,7 @@ function createFinancialTransactionTable( $mysqlConnection )
 function createDirectDebitTable( $mysqlConnection )
 {
 	//Create table financial_transaction
-	$sql= "CREATE TABLE user_direct_debit(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(5,2) NOT NULL, start_date DATETIME NOT NULL, recorruance_type tinyint, end_date DATETIME, category INT NOT NULL )";
+	$sql= "CREATE TABLE user_direct_debit(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(5,2) NOT NULL, start_date DATETIME NOT NULL, recourrance_type tinyint, end_date DATETIME, category INT NOT NULL )";
 	$mysqlConnection->mysql_create( $sql, "Finance table creation" );
 }
 

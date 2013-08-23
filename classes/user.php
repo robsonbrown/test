@@ -86,6 +86,14 @@ class User
 		
 		array_push($this->user_direct_debits, $transaction);
 	}
+	
+	//-----------------------
+	// 
+	//------------------------
+	public function get_user_direct_debits()
+	{
+		return $this->user_direct_debits;
+	}
 
 	//-----------------------
 	// 

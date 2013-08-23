@@ -26,18 +26,33 @@
 	}
 	
 	//-------------------
-	// Loads the list Panel for the members page (default view)
+	// Loads the list Panel with transactions data
 	//--------------------
 	if(isset( $_GET['transactionsListPanel'] ))
 	{
 		$user = $_SESSION['user'];
 		check_session_state();
-
-		$transactions = $user->get_user_transactions();
+		
 		$json = json_encode( $user->get_user_transactions() );
 		
 		echo $json;
 	}
+	
+	
+	//-------------------
+	// Loads the list Panel with direct debit data
+	//--------------------
+	if(isset( $_GET['directDebitListPanel'] ))
+	{
+		$user = $_SESSION['user'];
+		check_session_state();
+		
+		$json = json_encode( $user->get_user_direct_debits() );
+		
+		echo $json;
+	}
+	
+	
 	//-------------------
 	// Post back functions
 	//--------------------

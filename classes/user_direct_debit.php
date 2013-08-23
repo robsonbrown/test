@@ -51,7 +51,8 @@ class UserDirectDebit implements JsonSerializable
             'start_date' 			=> $this->amount,
 			'start_date'			=> $this->start_date,
 			'end_date' 				=> $this->end_date,
-			'recourrance_type'		=> $this->category
+			'recourrance_type'		=> $this->reocurrance_type,
+			'category'				=> $this->category
         ];
     }
 	

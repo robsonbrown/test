@@ -268,7 +268,7 @@ if(check.type === "text"){
 // Loads the table on the screen
 //--------------------
 $(document).ready(function() { 	
-	load_list_information( "/php/member.php", "transactionsListPanel", "transactionsList" );
+	load_list_information( "/php/member.php", "directDebitListPanel", "transactionsList" );
 	
     //$("#append").click(function() { 
     //   // add some html 

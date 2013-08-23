@@ -100,7 +100,14 @@ function get_columns_for_table( $header, rows )
 		}
 		break;
 		
+		case "directDebitListPanel": 
+		{
+			return [ rows[$i].amount, rows[$i].start_date, rows[$i].end_date, rows[$i].reocurrance_type ];
+		}
+		break;
+		
 		default:
+		return NULL;
 		break;
 	}
 }
@@ -116,6 +123,11 @@ function get_headers_for_table( header )
 		case "transactionsListPanel":
 		{
 			return [ "Time", "Category", "Amount" ];
+		}
+		break;
+		case "directDebitListPanel": 
+		{
+			return [ "Amount", "Start Date", "End Date", "Recourrance Type" ];
 		}
 		break;
 		
