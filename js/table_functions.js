@@ -28,8 +28,9 @@ function load_list_information( $urlName, $header, $listPanelName )
 				tableResult = jQuery.parseJSON(tableResult);
 				rows = tableResult;
 			});
-			
-	var headerText = "<tr><th>" + "Time" + "</th>" + "<th>" + "Category" + "</th>" + "<th>" + "Amount" + "</th> </tr>"; 
+		
+	var headerText = create_html_for_header( get_headers_for_table( $header ) );
+
 	$("#" + $listPanelName + " thead").append(headerText);
 	$("#" + $listPanelName ).trigger("update");
 	
@@ -39,8 +40,6 @@ function load_list_information( $urlName, $header, $listPanelName )
 	
 	while( $i < rows.length )
 	{	
-		//var html = "<tr><td>" + rows[$i].time + "</td>" + "<td>" + rows[$i].category + "</td>" + "<td>" + rows[$i].amount + "</td> </tr>"; 
-
 		$columns = get_columns_for_table( $header, rows );
 		
 		var html = create_html_for_row( $columns );
@@ -70,6 +69,23 @@ function create_html_for_row( $columns_to_add )
 	return html;
 }
 
+//-------------------
+// Create a HTML styled table row, with just the column names.
+//--------------------
+function create_html_for_header( headers )
+{
+	var html = "<tr>";
+	
+	for( k=0; k != headers.length; ++k )
+	{
+		html += "<th>" + headers[k] + "</th>";
+	}
+	
+	html += "</tr>";
+	
+	return html;
+}
+
 
 //-------------------
 // Create a HTML styled table row, with just the column names.
@@ -88,5 +104,27 @@ function get_columns_for_table( $header, rows )
 		break;
 	}
 }
+
+
+//-------------------
+// Create a HTML styled table row, with just the column names.
+//--------------------
+function get_headers_for_table( header )
+{
+	switch( header ) 
+	{
+		case "transactionsListPanel":
+		{
+			return [ "Time", "Category", "Amount" ];
+		}
+		break;
+		
+		default:
+		return NULL;
+		break;
+	}
+}
+
+
 
 
