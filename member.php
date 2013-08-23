@@ -23,12 +23,16 @@
 			<div id="top-buttons">
 				<input type="submit" id="logout" name="logout" value="logout">
 				
-				<div id="main-buttons">
+				<div id="funds-buttons">
 					<input type="submit" id="addFunds" name="addFunds" value="Add Funds">
 					<input type="submit" id="withdrawFunds" name="withdrawFunds" value="Withdraw Funds">
+				</div>
+				
+				<div id="main-buttons">
 					<input type="submit" id="manageDirectDebit" name="manageDirectDebit" value="Direct Debits">
 					<input type="submit" id="manageTargets" name="manageTargets" value="Targets">
 				</div>
+				
 			</div>
 		</div>	
 		
