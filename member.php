@@ -35,11 +35,6 @@
 		<div id="transactionsTable">
 			<table cellspacing="1" id="transactionsList" class="tablesorter">             
 				<thead> 
-					<tr> 
-						<th>Time</th> 
-						<th>Category</th> 
-						<th>Amount</th> 
-					</tr> 
 				</thead> 
 				<tbody>
 				</tbody> 

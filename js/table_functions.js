@@ -28,6 +28,13 @@ function load_list_information( $urlName, $header, $listPanelName )
 				tableResult = jQuery.parseJSON(tableResult);
 				rows = tableResult;
 			});
+			
+	var headerText = "<tr><th>" + "Time" + "</th>" + "<th>" + "Category" + "</th>" + "<th>" + "Amount" + "</th> </tr>"; 
+	$("#" + $listPanelName + " thead").append(headerText);
+	$("#" + $listPanelName ).trigger("update");
+	
+	$("#" + $listPanelName ).tablesorter();
+	
 	$i=0; 
 	
 	while( $i < rows.length )

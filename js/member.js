@@ -267,9 +267,7 @@ if(check.type === "text"){
 //-------------------
 // Loads the table on the screen
 //--------------------
-$(document).ready(function() { 
-	$("#transactionsList").tablesorter();
-	
+$(document).ready(function() { 	
 	load_list_information( "/php/member.php", "transactionsListPanel", "transactionsList" );
 	
     //$("#append").click(function() { 
