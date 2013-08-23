@@ -27,6 +27,7 @@ $('#funds')
 				{					
 					$("#funds-entrance").hide();
 					$("#transactionPopup").hide();
+					$("#top-buttons").show();
 					$("#funds").show();
 
 					funds_value = result.finance_total;
@@ -35,6 +36,7 @@ $('#funds')
 				{
 					$("#funds-entrance").show();
 					$("#funds").hide();
+					$("#top-buttons").hide();
 					$("#transactionPopup").hide();
 					
 					return false;
