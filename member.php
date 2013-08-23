@@ -98,8 +98,8 @@ include '/php/member.php';
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-<script type="text/javascript" src="js/member.js"></script>
-<script type="text/javascript" src="js/list_functions.js"></script>
-<script type="text/javascript" src="js/table_functions.js"></script>
+<script type="text/javascript" src="js/pages/member.js"></script>
+<script type="text/javascript" src="js/functions/list_functions.js"></script>
+<script type="text/javascript" src="js/functions/table_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 

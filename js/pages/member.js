@@ -267,11 +267,36 @@ if(check.type === "text"){
 
 
 //-------------------
+// Works out the current status of the 
+//--------------------
+
+
+//-------------------
 // Loads the table on the screen
 //--------------------
 $(document).ready(function() { 	
-	load_list_information( "/php/member.php", "directDebitListPanel", "transactionsList" );
 	
+	//Let's decide which table view to use
+	var table_name = "";
+	
+	//
+	//
+	//
+	//Implement a 'get current screen status function that will return the button(s) selected!!!
+	//
+	//
+	//
+	if( $("#manageDirectDebit").is(":disabled") )
+	{
+		table_name = "directDebitListPanel";
+	}
+	else
+	{
+		table_name = "transactionsListPanel";
+	}
+
+	load_list_information( "/php/member.php", "transactionsListPanel", "transactionsList" );
+	//directDebitListPanel
     //$("#append").click(function() { 
     //   // add some html 
     //   var html = "<tr><td>Peter</td><td>Parker</td><td>28</td><td>$9.99</td><td>20%</td><td>Jul 6, 2006 8:14 AM</td></tr>"; 
