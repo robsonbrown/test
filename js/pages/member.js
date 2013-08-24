@@ -1,7 +1,14 @@
-﻿
+﻿var TMStatus = {
+TRANSACTION: 0,
+DIRECT_DEBIT: 1,
+TARGET: 2
+}
+
 //Check that the datePicker type can be used with this browser type.
 var check = document.createElement("input");
 check.setAttribute("type", "date");
+
+var menu_status = TMStatus.TRANSACTION;
 
 //-------------------
 // Sets up the member page initially - Gets the current amount of funds for the current user
@@ -80,6 +87,9 @@ $('#funds')
 		$("#addFunds" ).button("disable");
 		$("#withdrawFunds" ).button("enable");
 		$("#manageDirectDebit" ).button("enable");
+		
+		
+		
 	  }
 	);
 	
@@ -103,10 +113,8 @@ $('#funds')
   $( "#manageDirectDebit" )
       .button()
       .click(function() 
-	  {		
-		$("#addFunds" ).button("enable");
-		$("#withdrawFunds" ).button("enable");
-		$("#manageDirectDebit" ).button("disable");
+	  {			  
+		update_top_menu_status( TMStatus.DIRECT_DEBIT );
 	  }
 	);
 	
@@ -117,9 +125,18 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		//$("#addFunds" ).button("enable");
-		//$("#withdrawFunds" ).button("enable");
-		//$("#manageDirectDebit" ).button("disable");
+		update_top_menu_status( TMStatus.TARGET );
+	  }
+	);
+	
+//-------------------
+// Manage transactions button
+//--------------------
+  $( "#manageTransactions" )
+      .button()
+      .click(function() 
+	  {		
+		update_top_menu_status( TMStatus.TRANSACTION );
 	  }
 	);
 	  
@@ -265,37 +282,80 @@ if(check.type === "text"){
     });
 }
 
+//-------------------
+// Works out the current status of the top menu.
+//--------------------
+function update_top_menu_status( top_menu_item )
+{
+	switch( top_menu_item )
+	{
+		case TMStatus.TRANSACTION:
+		{
+			$("#manageTransactions" ).button("disable");
+			$("#manageTargets" ).button("enable");
+			$("#manageDirectDebit" ).button("enable");
+		}
+		break;
+		case TMStatus.DIRECT_DEBIT:
+		{	
+			$("#manageTransactions" ).button("enable");
+			$("#manageTargets" ).button("enable");
+			$("#manageDirectDebit" ).button("disable");
+		}
+		break;
+		case TMStatus.TARGET:
+		{
+			$("#manageTransactions" ).button("enable");
+			$("#manageTargets" ).button("disable");
+			$("#manageDirectDebit" ).button("enable");
+		}
+		break;
+		default:
+		break;
+	}
+	
+	menu_status = top_menu_item;
+	
+	update_page();
+}
 
 //-------------------
-// Works out the current status of the 
+// 
 //--------------------
 
+function update_page()
+{
+	//Let's decide which table view to use
+	var table_name = "";
+
+	switch( menu_status )
+	{
+		case TMStatus.TRANSACTION:
+		{
+			table_name = "transactionsListPanel";
+		}
+		break;
+		case TMStatus.DIRECT_DEBIT:
+		{
+			table_name = "directDebitListPanel";
+		}
+		break;
+		case TMStatus.TARGET:
+		{
+		}
+		break;
+	}
+	
+	load_list_information( "/php/member.php", table_name, "transactionsList" );
+}
 
 //-------------------
 // Loads the table on the screen
 //--------------------
-$(document).ready(function() { 	
+$(document).ready(function() 
+{ 	
+	update_page();
 	
-	//Let's decide which table view to use
-	var table_name = "";
-	
-	//
-	//
-	//
-	//Implement a 'get current screen status function that will return the button(s) selected!!!
-	//
-	//
-	//
-	if( $("#manageDirectDebit").is(":disabled") )
-	{
-		table_name = "directDebitListPanel";
-	}
-	else
-	{
-		table_name = "transactionsListPanel";
-	}
-
-	load_list_information( "/php/member.php", "transactionsListPanel", "transactionsList" );
 	//directDebitListPanel
     //$("#append").click(function() { 
     //   // add some html 

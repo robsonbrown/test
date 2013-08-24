@@ -28,8 +28,7 @@ if(isset( $_POST['head'] ))
 		{
 			debug('login passed');
 			
-			// Register $myusername, $mypassword and redirect to file "login_success.php"
-			$_SESSION["user"] = $user;
+			set_session_data( $user );
 			
 			echo "passed";
 		}
@@ -89,6 +88,20 @@ function check_session_state()
 		debug( 'reloading' );
 		header("location:/index.php");
 	}
+}
+
+
+//------------------------
+// User & Menu session setup
+//------------------------
+
+function set_session_data( $user )
+{
+	//Set the user session
+	$_SESSION["user"] = $user;
+	
+	//$_SESSION["menu"] = 
+	
 }
 
 ?>

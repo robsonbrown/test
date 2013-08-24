@@ -13,7 +13,14 @@
 // Load a tableSorted List panel.
 //--------------------
 function load_list_information( $urlName, $header, $listPanelName )
-{
+{	
+	var table = $("#" + $listPanelName );
+	
+	//$.tablesorter.clearTableBody( table );
+	
+	//$("#" + $listPanelName).tablesorter().remove();
+	table.tablesorter({ theme : 'blue' });
+	
 	var rows;
 	
 	$.ajax
@@ -28,13 +35,19 @@ function load_list_information( $urlName, $header, $listPanelName )
 				tableResult = jQuery.parseJSON(tableResult);
 				rows = tableResult;
 			});
+	
+	table.tablesorter();
+		
+	table.find('thead').remove();
+	table.append('<thead> </thead>');
+	
+	table.find('tbody').remove();
+	table.append('<tbody> </tbody>');
 		
 	var headerText = create_html_for_header( get_headers_for_table( $header ) );
-
-	$("#" + $listPanelName + " thead").append(headerText);
-	$("#" + $listPanelName ).trigger("update");
-	
-	$("#" + $listPanelName ).tablesorter();
+	table.find('thead').append(headerText);
+	table.trigger( "update" );
+	table.tablesorter();
 	
 	$i=0; 
 	
@@ -44,12 +57,12 @@ function load_list_information( $urlName, $header, $listPanelName )
 		
 		var html = create_html_for_row( $columns );
 		
-		$("#" + $listPanelName + " tbody").append(html);
+		table.find('tbody').append(html);
 	
 		$i++;
 	}	
 	
-	$("#" + $listPanelName ).trigger("update");
+	table.trigger("update");
 }
 
 //-------------------

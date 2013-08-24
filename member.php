@@ -29,6 +29,7 @@
 				</div>
 				
 				<div id="main-buttons">
+					<input type="submit" id="manageTransactions" name="manageTransactions" value="Transactions">
 					<input type="submit" id="manageDirectDebit" name="manageDirectDebit" value="Direct Debits">
 					<input type="submit" id="manageTargets" name="manageTargets" value="Targets">
 				</div>
@@ -37,12 +38,7 @@
 		</div>	
 		
 		<div id="transactionsTable">
-			<table cellspacing="1" id="transactionsList" class="tablesorter">             
-				<thead> 
-				</thead> 
-				<tbody>
-				</tbody> 
-			</table>
+			<table cellspacing="1" id="transactionsList" class="tablesorter" />
 		</div>
 	
 		<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
