@@ -49,8 +49,8 @@
 			}
 			else
 			{
-				echo "Error running: " . $queryDescription . " " . mysqli_error($con);
-				echo "</br>The query that was run was : " . $sql;
+				debug( "Error running: " . $queryDescription . " " . mysqli_error($con) );
+				debug( "</br>The query that was run was : " . $sql );
 			}
 			
 			$this->closeConnection($con);
@@ -110,6 +110,8 @@
 			{
 				return true;
 			}
+			
+			debug('failed the insert query' );
 			
 			return false;
 		}

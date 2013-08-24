@@ -26,7 +26,7 @@
 			}
 			else
 			{
-				alert( "Shouldn't be here" );
+				alert( result );
 			}
 		});
 	   });

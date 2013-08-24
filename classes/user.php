@@ -9,8 +9,8 @@ class User
 	//-----------------------
 	// 
 	//------------------------
-    public function set_user( $id_in, $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in, $full_setup_in ) {
-        
+    public function set_user( $id_in, $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in, $full_setup_in ) 
+	{
 		$this->id 					= $id_in;
 		$this->user_name 			= $user_name_in;
 		$this->name		 			= $name_in;
@@ -33,6 +33,8 @@ class User
 		//$user_name_in 	= mysql_real_escape_string($user_name_in);
 		//$password_in 	= mysql_real_escape_string($password_in);
 		
+		debug('Login User Called');
+		
 		//Add the core user information
 		$query = "select * from user where user_name = '" . $user_name_in . "' and password = '" . md5($password_in) . "'";
 		
@@ -41,7 +43,7 @@ class User
 			return false;
 		}
 		
-		$row = mysqli_fetch_array($result);
+		$row = mysqli_fetch_array($result);		
 		$this->set_user( $row['ID'], $row['user_name'], $row['name'], $row['password'], $row['finance_total'], $row['email_address'], $row['full_setup'] );
 		
 		
@@ -98,25 +100,27 @@ class User
 	//-----------------------
 	// 
 	//------------------------
-	public function create_new_user()
+	public function create_new_user( $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in )
 	{		
+		debug('create new user called');
+		
 		//Insert the new user into the database.
 		$mysqlConnection = new Mysql;
 		
 		$query = "INSERT INTO user (user_name, name, password, finance_total, email_address, full_setup) ";
 		
-		$values = array( $this->user_name, $this->name, $this->password, $this->finance_total, $this->email_address, 0 );
+		$values = array( $user_name_in, $name_in, $password_in, $finance_total_in, $email_address_in, 0 );
 		
 		$queryDescription = "Insert User";
 		
 		if( $mysqlConnection->mysql_insert( $query, $values, $queryDescription ) )
 		{
-			//Launch the initial user session so the user can jump straight into the app.
-			session_start();
-			$this->login_user( $this->first_name, $this->password );
-			$_SESSION["user"] = $this;
-			
-			header("location:/member.php");
+			return true;
+		}
+		else
+		{
+			debug('create user failed');
+			return false;
 		}
 	}
 	

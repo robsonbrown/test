@@ -3,10 +3,9 @@
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="js/pages/index.js"></script>
 <script type="text/javascript" src="js/functions/list_functions.js"></script>
-<script type="text/javascript" src="js/functions/jquery.tools.min.js"></script>
-
 
 <?php
 	include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');

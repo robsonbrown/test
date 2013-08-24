@@ -24,19 +24,7 @@ if(isset( $_POST['head'] ))
 		
 		$user = new User();
 		
-		if( $user->login_user( $username, $password ) )
-		{
-			debug('login passed');
-			
-			set_session_data( $user );
-			
-			echo "passed";
-		}
-		else 
-		{
-			debug('login failed');
-			echo "false";
-		}
+		login_user( $user, $username, $password );
 	}
 	else if( $header == 'signUp' )
 	{
@@ -49,8 +37,10 @@ if(isset( $_POST['head'] ))
 		$email=$_POST['email']; 
 		
 		$user = new User();
-		$user->set_user( -1, $username, $name, md5($password), $finance, $email );
-		$user->create_new_user();
+		if( $user->create_new_user( $username, $name, md5($password), $finance, $email ) )
+		{
+			login_user( $user, $username, $password );		
+		}
 	}
 	else if( $header == 'logout' )
 	{
@@ -101,7 +91,27 @@ function set_session_data( $user )
 	$_SESSION["user"] = $user;
 	
 	//$_SESSION["menu"] = 
-	
+}
+
+//------------------------
+// Functionality to log in a user
+//------------------------
+
+function login_user( $user, $username, $password )
+{
+	if( $user->login_user( $username, $password ) )
+	{
+		debug('login passed');
+		
+		set_session_data( $user );
+		
+		echo "passed";
+	}
+	else 
+	{
+		debug('login failed');
+		echo "false";
+	}
 }
 
 ?>
