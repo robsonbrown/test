@@ -11,6 +11,38 @@ check.setAttribute("type", "date");
 var menu_status = TMStatus.TRANSACTION;
 
 //-------------------
+// New User dialog setup
+//--------------------
+$( "#transactionPopup" ).dialog({
+autoOpen: false,
+height: 300,
+width: 350,
+modal: true,
+buttons: 
+{
+	"Update Finance": function() 
+	{
+		update_finance();
+		enable_transaction_buttons();
+	},
+	"Cancel": function()
+	{
+		$( this ).dialog( "close" );
+		enable_transaction_buttons();
+	}
+}	
+});
+
+//-------------------
+// Enable transaction buttons
+//--------------------
+function enable_transaction_buttons()
+{
+	$("#addFunds" ).button("enable");
+	$("#withdrawFunds" ).button("enable");
+}
+
+//-------------------
 // Sets up the member page initially - Gets the current amount of funds for the current user
 //--------------------
 $('#funds')
@@ -83,13 +115,9 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$("#transactionPopup").show();
+		$( "#transactionPopup" ).dialog( 'option', 'title', 'Add Funds' );
+		$( "#transactionPopup" ).dialog( "open" );
 		$("#addFunds" ).button("disable");
-		$("#withdrawFunds" ).button("enable");
-		$("#manageDirectDebit" ).button("enable");
-		
-		
-		
 	  }
 	);
 	
@@ -100,10 +128,9 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$("#transactionPopup").show();		
-		$("#addFunds" ).button("enable");
+		$( "#transactionPopup" ).dialog( 'option', 'title', 'Withdraw Funds' );
+		$( "#transactionPopup" ).dialog( "open" );
 		$("#withdrawFunds" ).button("disable");
-		$("#manageDirectDebit" ).button("enable");
 	  }
 	);
 	
@@ -143,7 +170,7 @@ $('#funds')
 
 
 //-------------------
-// When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
+// When the 'set total button is clicked, it will validate and then send through the add call to the php.
 //--------------------
  $( "#setTotal" )
       .button()
@@ -199,63 +226,61 @@ $( "#cancelFinance" )
 //-------------------
 // When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
 //--------------------
- $( "#addFinance" )
-      .button()
-      .click(function() 
-	  {
-		var bValid = true;
+function update_finance()
+{
+	var bValid = true;
+	
+	tips = $( ".validateTips" );
+	
+	//Check that the values 
+	bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
+	bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+	
+	bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
+	bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
+	
+	if ( bValid ) 
+	{	
+		var header = "";
+	
+		if( $("#addFunds").is(":disabled") )
+		{
+			header	= "addFinance";
+		}
+		else
+		{
+			header	= "removeFinance";
+		}
+	
+		var myamount 	= $( "#amount" ).val();
+		var	mytime 		= $( "#time" ).val();
+		var mycategory  = $( "#category" ).val();
 		
-		tips = $( ".validateTips" );
-	  
-		//Check that the values 
-		bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
-		bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
-		
-		bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
-		bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
-	  
-		if ( bValid ) 
-		{	
-			var header = "";
-		
-			if( $("#addFunds").is(":disabled") )
+		$.ajax({
+		type: "POST",
+		url: "/php/member.php",
+		data: {head:header, amount:myamount, time:mytime, category:mycategory}
+		}).done(function( result ) 
+		{						
+			if( result == false )
 			{
-				header	= "addFinance";
+				alert("The transaction could not be undertaken, please contact an administrator.");
+			}
+			else if( result == true )
+			{
+				location.reload();
 			}
 			else
 			{
-				header	= "removeFinance";
+				alert( "Shouldn't be here" );
 			}
-
-			var myamount 	= $( "#amount" ).val();
-			var	mytime 		= $( "#time" ).val();
-			var mycategory  = $( "#category" ).val();
-			
-			$.ajax({
-			type: "POST",
-			url: "/php/member.php",
-			data: {head:header, amount:myamount, time:mytime, category:mycategory}
-			}).done(function( result ) 
-			{						
-				if( result == false )
-				{
-					alert("The transaction could not be undertaken, please contact an administrator.");
-				}
-				else if( result == true )
-				{
-					location.reload();
-				}
-				else
-				{
-					alert( "Shouldn't be here" );
-				}
-			});
+		});
 		}
 		else
 		{
 			alert( "Screwed!");
 		}
-	  });
+};
 	  
 //-------------------
 // Checks that HTML5 can be used in the browser for the calendar picker.

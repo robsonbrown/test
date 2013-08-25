@@ -1,5 +1,6 @@
 
-body{
+body
+{
 	font-size: 10px;
 }
 
@@ -55,9 +56,6 @@ body{
 
 #transactionPopup
 {
-	position:absolute;
-	top:20%;
-	left:1%;
 	font-family:Sans-serif;
 }
 

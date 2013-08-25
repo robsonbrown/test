@@ -38,6 +38,7 @@ function load_list_information( $urlName, $header, $listPanelName )
 	
 	table.tablesorter();
 		
+	//table.append('<th> test </th>');
 	table.find('thead').remove();
 	table.append('<thead> </thead>');
 	
