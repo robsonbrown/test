@@ -43,6 +43,9 @@ open: function()
 	{
 		$(this).dialog( 'option', 'title', 'Withdraw Funds' );
 	}
+	
+	//Set up the date field
+    $("#time").attr("value",  get_current_date() );
 }
 	
 });

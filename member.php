@@ -54,7 +54,7 @@
 					<label for="Amount">Amount</label>
 					<input type="text" name="amount" id="amount" required="required" class="text ui-widget-content ui-corner-all" />
 					</br>
-					<label for="Time">Time</label>
+					<label for="Time">Date</label>
 					<input type="date" name="time" id="time" required="required" class="text ui-widget-content ui-corner-all" />
 					</br>
 					<label for="category">Category</label>
@@ -79,5 +79,6 @@ include '/php/member.php';
 <script type="text/javascript" src="js/pages/member.js"></script>
 <script type="text/javascript" src="js/functions/list_functions.js"></script>
 <script type="text/javascript" src="js/functions/table_functions.js"></script>
+<script type="text/javascript" src="js/functions/date_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
