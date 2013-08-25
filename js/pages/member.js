@@ -20,14 +20,14 @@ width: 350,
 modal: true,
 buttons: 
 {
-	"Update Finance": function() 
-	{
-		update_finance();
-		enable_transaction_buttons();
-	},
 	"Cancel": function()
 	{
 		$( this ).dialog( "close" );
+		enable_transaction_buttons();
+	},
+	"Update Finance": function() 
+	{
+		update_finance();
 		enable_transaction_buttons();
 	}
 },

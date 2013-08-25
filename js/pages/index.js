@@ -63,6 +63,11 @@
 		modal: true,
 		buttons: 
 		{
+			"Cancel": function() 
+			{
+				$( this ).dialog( "close" );
+				//alert("cancelled");
+			},
 			"Create an account": function() 
 			{
 				var bValid = true;
@@ -102,11 +107,6 @@
 					
 					$( this ).dialog( "close" );
 				}
-			},
-			Cancel: function() 
-			{
-				$( this ).dialog( "close" );
-				//alert("cancelled");
 			}
 		},
 		close: function() 
