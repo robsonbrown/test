@@ -30,7 +30,21 @@ buttons:
 		$( this ).dialog( "close" );
 		enable_transaction_buttons();
 	}
-}	
+},
+open: function() 
+{
+	 $(this).parent().find(".ui-dialog-titlebar-close").hide();
+	 
+	if( $("#addFunds").is(":disabled") )
+	{
+		$(this).dialog( 'option', 'title', 'Add Funds' );
+	}
+	else
+	{
+		$(this).dialog( 'option', 'title', 'Withdraw Funds' );
+	}
+}
+	
 });
 
 //-------------------
@@ -115,7 +129,6 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$( "#transactionPopup" ).dialog( 'option', 'title', 'Add Funds' );
 		$( "#transactionPopup" ).dialog( "open" );
 		$("#addFunds" ).button("disable");
 	  }
@@ -128,7 +141,6 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$( "#transactionPopup" ).dialog( 'option', 'title', 'Withdraw Funds' );
 		$( "#transactionPopup" ).dialog( "open" );
 		$("#withdrawFunds" ).button("disable");
 	  }
