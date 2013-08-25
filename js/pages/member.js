@@ -128,9 +128,9 @@ $('#funds')
   $( "#addFunds" )
       .button()
       .click(function() 
-	  {		
-		$( "#transactionPopup" ).dialog( "open" );
+	  {	
 		$("#addFunds" ).button("disable");
+		$( "#transactionPopup" ).dialog( "open" );
 	  }
 	);
 	
@@ -141,8 +141,8 @@ $('#funds')
       .button()
       .click(function() 
 	  {		
-		$( "#transactionPopup" ).dialog( "open" );
 		$("#withdrawFunds" ).button("disable");
+		$( "#transactionPopup" ).dialog( "open" );
 	  }
 	);
 	
