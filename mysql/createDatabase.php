@@ -20,6 +20,7 @@ function createDatabaseTables( $mysqlConnection )
 	createUserTable( $mysqlConnection );
 	createFinancialTransactionTable( $mysqlConnection );
 	createDirectDebitTable( $mysqlConnection );
+	createTargetTable( $mysqlConnection );
 	
 	//Create table transaction type
 	//$sql= "CREATE TABLE pending_transactions(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), name VARCHAR(30) NOT NULL )";
@@ -43,7 +44,7 @@ function createFinancialTransactionTable( $mysqlConnection )
 {
 	//Create table financial_transaction
 	$sql= "CREATE TABLE user_transaction(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(5,2) NOT NULL, time DATETIME NOT NULL, category INT NOT NULL )";
-	$mysqlConnection->mysql_create( $sql, "Finance table creation" );
+	$mysqlConnection->mysql_create( $sql, "Financial transaction table creation" );
 }
 
 //------------------------
@@ -53,7 +54,17 @@ function createDirectDebitTable( $mysqlConnection )
 {
 	//Create table financial_transaction
 	$sql= "CREATE TABLE user_direct_debit(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(5,2) NOT NULL, start_date DATETIME NOT NULL, recourrance_type tinyint, end_date DATETIME, category INT NOT NULL )";
-	$mysqlConnection->mysql_create( $sql, "Finance table creation" );
+	$mysqlConnection->mysql_create( $sql, "Direct Debit table creation" );
+}
+
+//------------------------
+// Create table targets
+//------------------------
+function createTargetTable( $mysqlConnection )
+{
+	//Create table financial_transaction
+	$sql= "CREATE TABLE user_target(ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID), user_id INT NOT NULL, amount DECIMAL(5,2) NOT NULL, target_date DATETIME NOT NULL, category INT NOT NULL, name VARCHAR(50) NOT NULL )";
+	$mysqlConnection->mysql_create( $sql, "Target table creation" );
 }
 
 createDatabase();

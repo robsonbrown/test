@@ -136,7 +136,7 @@ function get_headers_for_table( header )
 	{
 		case "transactionsListPanel":
 		{
-			return [ "Time", "Category", "Amount" ];
+			return [ "Date", "Category", "Amount" ];
 		}
 		break;
 		case "directDebitListPanel": 

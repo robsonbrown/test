@@ -74,7 +74,41 @@ class User
 			$this->add_direct_debit( $row['ID'], $row['amount'], $row['start_date'], $row['recourrance_type'], $row['end_date'], $row['category'] );
 		}
 		
+		
+		//Now add the targets
+		$query = "select * from user_target where user_id = " . $this->id;
+		
+		if( !$mysqlConnection->mysql_select( $query, "user_target select", 0, $result ) )
+		{
+			return false;
+		}
+		
+		while( $row = mysqli_fetch_array($result) )
+		{
+			$this->add_target( $row['ID'], $row['amount'], $row['target_date'], $row['category'], $row['name'] );
+		}
+		
 		return true;
+	}
+	
+	//-----------------------
+	// 
+	//------------------------
+	public function add_target( $id_in, $amount_in, $target_date_in, $category_in, $name_in )
+	{		
+		$transaction = new UserTarget;
+		
+		$transaction->set_user_target( $id_in, $this->get_id(), $amount_in, $target_date_in, $name_in, $category_in );
+		
+		array_push($this->user_targets, $transaction);
+	}
+	
+	//-----------------------
+	// 
+	//------------------------
+	public function get_user_targets()
+	{
+		return $this->user_targets;
 	}
 	
 	//-----------------------
@@ -264,6 +298,7 @@ class User
 	
 	protected $user_transactions 		= array();
 	protected $user_direct_debits 		= array();
+	protected $user_targets				= array();
 }
 
 ?>

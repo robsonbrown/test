@@ -98,7 +98,7 @@
 					url: "session/session_handler.php",
 					data: {head:header, username:myusername, name:name, password:password, finance:finance, email:email}}
 					).done
-					(
+					(					
 						function( result ) 
 						{
 							location.reload();
