@@ -336,6 +336,7 @@ function update_top_menu_status( top_menu_item )
 			$("#manageDirectDebit" ).button("enable");
 		}
 		break;
+		
 		case TMStatus.DIRECT_DEBIT:
 		{	
 			$("#manageTransactions" ).button("enable");
@@ -343,6 +344,7 @@ function update_top_menu_status( top_menu_item )
 			$("#manageDirectDebit" ).button("disable");
 		}
 		break;
+		
 		case TMStatus.TARGET:
 		{
 			$("#manageTransactions" ).button("enable");
@@ -350,6 +352,7 @@ function update_top_menu_status( top_menu_item )
 			$("#manageDirectDebit" ).button("enable");
 		}
 		break;
+		
 		default:
 		break;
 	}
@@ -382,6 +385,7 @@ function update_page()
 		break;
 		case TMStatus.TARGET:
 		{
+			table_name = "targetListPanel";
 		}
 		break;
 	}
@@ -394,7 +398,7 @@ function update_page()
 //--------------------
 $(document).ready(function() 
 { 	
-	update_page();
+	update_top_menu_status( menu_status );
 	
 	//directDebitListPanel
     //$("#append").click(function() { 

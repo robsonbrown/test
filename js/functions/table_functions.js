@@ -120,6 +120,12 @@ function get_columns_for_table( $header, rows )
 		}
 		break;
 		
+		case "targetListPanel":
+		{
+			return [ rows[$i].name, rows[$i].target_date, rows[$i].amount ];
+		}
+		break;
+		
 		default:
 		return NULL;
 		break;
@@ -139,9 +145,16 @@ function get_headers_for_table( header )
 			return [ "Date", "Category", "Amount" ];
 		}
 		break;
+		
 		case "directDebitListPanel": 
 		{
 			return [ "Amount", "Start Date", "End Date", "Recourrance Type" ];
+		}
+		break;
+		
+		case "targetListPanel":
+		{
+			return [ "Name", "Target Date", "Amount" ];
 		}
 		break;
 		

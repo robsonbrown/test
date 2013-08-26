@@ -53,6 +53,20 @@
 	}
 	
 	
+		//-------------------
+	// Loads the list Panel with direct debit data
+	//--------------------
+	if(isset( $_GET['targetListPanel'] ))
+	{
+		$user = $_SESSION['user'];
+		check_session_state();
+		
+		$json = json_encode( $user->get_user_targets() );
+		
+		echo $json;
+	}
+	
+	
 	//-------------------
 	// Post back functions
 	//--------------------
