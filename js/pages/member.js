@@ -18,6 +18,14 @@ autoOpen: false,
 height: 300,
 width: 350,
 modal: true,
+show: 
+{
+    effect: "blind",
+    duration: 200,
+	
+	//$(this).parent().append( "Test" );
+	//$(this).append('<thead> </thead>');
+},
 buttons: 
 {
 	"Cancel": function()
@@ -34,6 +42,31 @@ buttons:
 open: function() 
 {
 	 $(this).parent().find(".ui-dialog-titlebar-close").hide();
+	 
+	 $(this).parent().find('fieldset').remove();
+	 
+	 var newTextBoxDiv = $(document.createElement('div'))
+      .attr("id", 'TextBoxDiv');
+
+	 newTextBoxDiv.html(
+	'<fieldset>' +
+		'<label for="Amount">Amount</label>' +
+		'<input type="text" name="amount" id="amount" required="required" class="text ui-widget-content ui-corner-all" />' +
+		'</br>' +
+		'<label for="Time">Date</label>' +
+		'<input type="date" name="time" id="time" required="required" class="text ui-widget-content ui-corner-all" />' +
+		'</br>' +
+		'<label for="category">Category</label>' +
+		'<input type="text" name="category" id="category" required="required" value="" class="text ui-widget-content ui-corner-all" />' +
+	'</fieldset>' );
+	 
+	newTextBoxDiv.appendTo(this);
+	 
+	 
+	//'<TABLE><TR><TD>' +
+	// '<input type="text" name="textbox' + 
+	// '" id="textbox' + '" value="" ></TD><TD><input type="text" name="textbox' + 
+	// '" id="textbox' + '" value="" ></TD>&nbsp;<TD><a href="#" value="addButton" class="addButton">Add</a>&nbsp;<a href="#" value="removeButton" class="removeButton">Remove</a></TD></TR></TABLE>');
 	 
 	if( $("#addFunds").is(":disabled") )
 	{

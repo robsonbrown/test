@@ -50,16 +50,6 @@
 		<div id="transactionPopup" >
 			<p class="validateTips">All form fields are required.</p>
 			<form>
-				<fieldset>
-					<label for="Amount">Amount</label>
-					<input type="text" name="amount" id="amount" required="required" class="text ui-widget-content ui-corner-all" />
-					</br>
-					<label for="Time">Date</label>
-					<input type="date" name="time" id="time" required="required" class="text ui-widget-content ui-corner-all" />
-					</br>
-					<label for="category">Category</label>
-					<input type="text" name="category" id="category" required="required" value="" class="text ui-widget-content ui-corner-all" />
-				</fieldset>
 			</form>
 		</div>
 		
