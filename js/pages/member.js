@@ -376,16 +376,23 @@ function update_page()
 		case TMStatus.TRANSACTION:
 		{
 			table_name = "transactionsListPanel";
+			$("#addFunds").attr('value', 'Add Funds');
+			$("#withdrawFunds").show();
+			$("#withdrawFunds").attr('value', 'Withdraw Funds');
 		}
 		break;
 		case TMStatus.DIRECT_DEBIT:
 		{
 			table_name = "directDebitListPanel";
+			$("#addFunds").attr('value', 'Add Direct Debit');
+			$("#withdrawFunds").hide();
 		}
 		break;
 		case TMStatus.TARGET:
 		{
 			table_name = "targetListPanel";
+			$("#addFunds").attr('value', 'Add Target');
+			$("#withdrawFunds").hide();
 		}
 		break;
 	}
