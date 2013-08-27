@@ -70,5 +70,6 @@ include '/php/member.php';
 <script type="text/javascript" src="js/functions/list_functions.js"></script>
 <script type="text/javascript" src="js/functions/table_functions.js"></script>
 <script type="text/javascript" src="js/functions/date_functions.js"></script>
+<script type="text/javascript" src="js/functions/form_functions.js"></script>
 <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 

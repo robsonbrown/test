@@ -1,14 +1,3 @@
-
-//if( $("#manageDirectDebit").is(":disabled") )
-//{
-//	header	= "manageDirectDebit";
-//	alert('hello');
-//}
-//else
-//{
-//	header	= "listPanel";
-//}
-
 //-------------------
 // Load a tableSorted List panel.
 //--------------------
