@@ -100,10 +100,12 @@
 		else if( $header == 'addFinance' || $header == 'removeFinance' )
 		{				
 			debug( $header . ' called.');
-		
-			$amount=$_POST['amount']; 
-			$time=$_POST['time']; 
-			$category=$_POST['category']; 
+			
+			$values=$_POST['array'];
+			
+			$amount = $values[0];
+			$time = $values[1];
+			$category = $values[2]; 
 			
 			if( $header == 'addFinance' )
 			{

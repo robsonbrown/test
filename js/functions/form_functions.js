@@ -82,3 +82,34 @@ function get_button_name()
 {
 	return 'test';
 }
+
+//-------------------
+// Creates and sends a post function using ajax
+//--------------------
+function post_form_data( header, value_array )
+{
+	$.ajax({
+		type: "POST",
+		url: "/php/member.php",
+		data: 
+		{
+			head:header, 			
+			array:value_array
+		}
+		}).done(function( result ) 
+		{						
+			if( result == false )
+			{
+				alert("The transaction could not be undertaken, please contact an administrator.");
+			}
+			else if( result == true )
+			{
+				location.reload();
+			}
+			else
+			{
+				alert( "Shouldn't be here" );
+			}
+		});
+}
+

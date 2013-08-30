@@ -278,34 +278,14 @@ function update_finance()
 			header	= "removeFinance";
 		}
 	
-		var myamount 	= $( "#amount" ).val();
-		var	mytime 		= $( "#time" ).val();
-		var mycategory  = $( "#category" ).val();
+		var value_array = [ $( "#amount" ).val(), $( "#time" ).val(), $( "#category" ).val() ];
 		
-		$.ajax({
-		type: "POST",
-		url: "/php/member.php",
-		data: {head:header, amount:myamount, time:mytime, category:mycategory}
-		}).done(function( result ) 
-		{						
-			if( result == false )
-			{
-				alert("The transaction could not be undertaken, please contact an administrator.");
-			}
-			else if( result == true )
-			{
-				location.reload();
-			}
-			else
-			{
-				alert( "Shouldn't be here" );
-			}
-		});
-		}
-		else
-		{
-			alert( "Screwed!");
-		}
+		post_form_data( header, value_array );
+	}
+	else
+	{
+		alert( "Screwed!");
+	}
 };
 	  
 //-------------------
