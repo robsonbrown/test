@@ -253,30 +253,10 @@ $( "#cancelFinance" )
 // When the 'add transaction button is clicked, it will validate and then send through the add call to the php.
 //--------------------
 function update_finance()
-{
-	var bValid = true;
-	
-	tips = $( ".validateTips" );
-	
-	//Check that the values 
-	bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
-	bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
-	
-	bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
-	bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
-	
-	if ( bValid ) 
+{	
+	if ( validate_form_data( menu_status ) ) 
 	{	
-		var header = "";
-	
-		if( $("#addFunds").is(":disabled") )
-		{
-			header	= "addFinance";
-		}
-		else
-		{
-			header	= "removeFinance";
-		}
+		var header = get_form_header_name( menu_status, $("#addFunds").is(":disabled") );
 	
 		var value_array = [ $( "#amount" ).val(), $( "#time" ).val(), $( "#category" ).val() ];
 		
@@ -284,7 +264,7 @@ function update_finance()
 	}
 	else
 	{
-		alert( "Screwed!");
+		alert( "Something has gone wrong when trying to update the finance..");
 	}
 };
 	  

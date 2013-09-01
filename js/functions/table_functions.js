@@ -8,8 +8,6 @@ function load_list_information( $urlName, $header, $listPanelName )
 	//$.tablesorter.clearTableBody( table );
 	
 	//$("#" + $listPanelName).tablesorter().remove();
-	table.tablesorter({ theme : 'blue' });
-	
 	var rows;
 	
 	$.ajax

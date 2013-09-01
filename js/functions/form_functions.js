@@ -113,3 +113,54 @@ function post_form_data( header, value_array )
 		});
 }
 
+//-------------------
+// Validate posts
+//--------------------
+function validate_form_data( id_in )
+{
+	tips = $( ".validateTips" );
+	
+	var bValid = true;
+	
+	switch( id_in )
+	{
+		case TMStatus.TRANSACTION:
+		{	
+			//Check that the values 
+			bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
+			bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+			
+			bValid = bValid && checkLength( $( "#time" ), "time", 1, 10 );
+			bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
+		}
+		break;
+		default:
+		break;
+	}
+	
+	return bValid;
+}
+
+//-------------------
+// Form Header name
+//--------------------
+function get_form_header_name( id_in, add_button_status )
+{
+	switch( id_in )
+	{
+		case TMStatus.TRANSACTION:
+		{	
+			if( add_button_status )
+			{
+				return "addFinance";
+			}
+			else
+			{
+				return "removeFinance";
+			}
+		}
+		default:
+		break;
+	}
+}
+
