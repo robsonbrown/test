@@ -2,6 +2,7 @@
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/mysql/phpMysql.php');
 include_once( 'user_transaction.php' );
+include_once( 'user_target.php' );
 include_once( 'user_direct_debit.php' );
 
 class User
@@ -71,7 +72,7 @@ class User
 		
 		while( $row = mysqli_fetch_array($result) )
 		{
-			$this->add_direct_debit( $row['ID'], $row['amount'], $row['start_date'], $row['recourrance_type'], $row['end_date'], $row['category'] );
+			$this->add_direct_debit( $row['ID'], $row['amount'], $row['start_date'], $row['end_date'], $row['recourrance_type'], $row['category'] );
 		}
 		
 		
@@ -94,7 +95,7 @@ class User
 	//-----------------------
 	// 
 	//------------------------
-	public function add_target( $id_in, $amount_in, $target_date_in, $category_in, $name_in )
+	private function add_target( $id_in, $amount_in, $target_date_in, $category_in, $name_in )
 	{		
 		$transaction = new UserTarget;
 		
@@ -102,6 +103,40 @@ class User
 		
 		array_push($this->user_targets, $transaction);
 	}
+	
+	//-----------------------
+	//  Adds a direct debit transaction for the user.
+	//------------------------
+	public function insert_target_transaction( $amount, $target_date, $category, $name )
+	{
+		//Let's add this to the database..
+		$mysqlConnection = new Mysql;
+			
+		$query = "INSERT INTO user_target (user_id, amount, target_date, category, name) ";
+		
+		$values = array( $this->get_id(), $amount, $target_date, $category, $name );
+		
+		$queryDescription = "Insert target";
+		
+		debug( "inserting target" );
+		
+		if( $mysqlConnection->mysql_insert( $query, $values, $queryDescription ) )
+		{	
+			debug( "success" );
+		
+			//Now we need to select out that transaction to get the new id.
+			$added_id = $mysqlConnection->select_most_recent_id( $this->get_id(), "user_target");
+	
+			//Finally, let's add it to the current session.
+			$this->add_target( $added_id, $amount, $target_date, $category, $name );
+			
+			//Now we're going to update the current finance value
+			//$this->update_finance_total( $amount );
+			
+			return true;
+		}
+	}
+	
 	
 	//-----------------------
 	// 
@@ -114,14 +149,47 @@ class User
 	//-----------------------
 	// 
 	//------------------------
-	public function add_direct_debit( $id_in, $amount_in, $start_date_in, $reocurrance_type_in, $end_date_in, $category_in )
+	private function add_direct_debit( $id_in, $amount_in, $start_date_in, $end_date_in, $reocurrance_type_in, $category_in )
 	{		
 		$transaction = new UserDirectDebit;
-		
-		$transaction->set_user_direct_debit( $id_in, $this->get_id(), $amount_in, $start_date_in, $reocurrance_type_in, $end_date_in, $category_in );
+		$transaction->set_user_direct_debit( $id_in, $this->get_id(), $amount_in, $start_date_in, $end_date_in, $reocurrance_type_in, $category_in );
 		
 		array_push($this->user_direct_debits, $transaction);
 	}
+	
+	//-----------------------
+	//  Adds a direct debit transaction for the user.
+	//------------------------
+	public function insert_direct_debit_transaction( $amount, $start_date, $end_date, $recourrance_type, $category )
+	{
+		//Let's add this to the database..
+		$mysqlConnection = new Mysql;
+			
+		$query = "INSERT INTO user_direct_debit (user_id, amount, start_date, end_date, category) ";
+		
+		$values = array( $this->get_id(), $amount, $start_date, $end_date, $category );
+		
+		$queryDescription = "Insert direct debit";
+		
+		debug( "inserting direct debit" );
+		
+		if( $mysqlConnection->mysql_insert( $query, $values, $queryDescription ) )
+		{	
+			debug( "success" );
+		
+			//Now we need to select out that transaction to get the new id.
+			$added_id = $mysqlConnection->select_most_recent_id( $this->get_id(), "user_direct_debit");
+	
+			//Finally, let's add it to the current session.
+			$this->add_direct_debit( $added_id, $amount, $start_date, $end_date, $recourrance_type, $category );
+			
+			//Now we're going to update the current finance value
+			//$this->update_finance_total( $amount );
+			
+			return true;
+		}
+	}
+	
 	
 	//-----------------------
 	// 
@@ -236,7 +304,7 @@ class User
 	//------------------------
 	public function insert_user_transaction( $amount, $time, $category, $type )
 	{
-		//Let's add this shiz to the database..
+		//Let's add this to the database..
 		$mysqlConnection = new Mysql;
 			
 		$query = "INSERT INTO user_transaction (user_id, amount, time, category) ";

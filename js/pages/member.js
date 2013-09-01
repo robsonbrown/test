@@ -258,7 +258,7 @@ function update_finance()
 	{	
 		var header = get_form_header_name( menu_status, $("#addFunds").is(":disabled") );
 	
-		var value_array = [ $( "#amount" ).val(), $( "#time" ).val(), $( "#category" ).val() ];
+		var value_array = get_form_post_array( menu_status );
 		
 		post_form_data( header, value_array );
 	}

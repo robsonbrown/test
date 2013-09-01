@@ -5,7 +5,7 @@ class UserTarget implements JsonSerializable
 	//-----------------------
 	// 
 	//------------------------
-	public function set_user_direct_debit( $id_in, $user_id_in, $amount_in, $target_date_in, $category_in, $name_in )
+	public function set_user_target( $id_in, $user_id_in, $amount_in, $target_date_in, $category_in, $name_in )
 	{
 		$this->id 			 		= $id_in;
 		$this->user_id	 	 		= $user_id_in;

@@ -56,6 +56,8 @@ function get_form_for_data( id_in )
 			html_text += create_fieldset_row( 'date', 'end_date', 'End Date', 'end_date', 'required', 'text ui-widget-content ui-corner-all' );
 			html_text += '</br>';
 			html_text += create_fieldset_row( 'text', 'recourrance', 'Recourrance', 'recourrance', 'required', 'text ui-widget-content ui-corner-all' );
+			html_text += '</br>';
+			html_text += create_fieldset_row( 'text', 'category', 'Category', 'category', 'required', 'text ui-widget-content ui-corner-all' );
 		}
 		break;
 		case TMStatus.TARGET:
@@ -66,6 +68,7 @@ function get_form_for_data( id_in )
 			html_text += '</br>';
 			html_text += create_fieldset_row( 'text', 'category', 'Category', 'category', 'required', 'text ui-widget-content ui-corner-all' );
 			html_text += '</br>';
+			html_text += create_fieldset_row( 'text', 'name', 'Name', 'name', 'required', 'text ui-widget-content ui-corner-all' );
 		}
 		break;
 		default:
@@ -141,6 +144,18 @@ function validate_form_data( id_in )
 			
 			bValid = bValid && checkLength( $( "#start_date" ), "start_date", 1, 10 );
 			bValid = bValid && checkLength( $( "#end_date" ), "end_date", 1, 10 );
+			
+			bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
+		}
+		break;
+		case TMStatus.TARGET:
+		{
+			bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
+			bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+			
+			bValid = bValid && checkLength( $( "#target_date" ), "target_date", 1, 10 );
+			
+			bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
 		}
 		break;
 		default:
@@ -177,6 +192,33 @@ function get_form_header_name( id_in, add_button_status )
 		case TMStatus.TARGET:
 		{
 			return 'addTarget';
+		}
+		break;
+		default:
+		break;
+	}
+}
+
+//-------------------
+// Post array
+//--------------------
+function get_form_post_array( id_in )
+{
+	switch( id_in )
+	{
+		case TMStatus.TRANSACTION:
+		{	
+			return [ $( "#amount" ).val(), $( "#time" ).val(), $( "#category" ).val() ];
+		}
+		break;
+		case TMStatus.DIRECT_DEBIT:
+		{	
+			return [ $( "#amount" ).val(), $( "#start_date" ).val(), $( "#end_date" ).val(), $( "#recourrance" ).val(), $( "#category" ).val() ];
+		}
+		break;
+		case TMStatus.TARGET:
+		{
+			return [ $( "#amount" ).val(), $( "#target_date" ).val(), $( "#category" ).val(), $( "#name" ).val() ];
 		}
 		break;
 		default:

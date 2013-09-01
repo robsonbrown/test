@@ -5,14 +5,14 @@ class UserDirectDebit implements JsonSerializable
 	//-----------------------
 	// 
 	//------------------------
-	public function set_user_direct_debit( $id_in, $user_id_in, $amount_in, $start_date_in, $reocurrance_type_in, $end_date_in, $category_in )
+	public function set_user_direct_debit( $id_in, $user_id_in, $amount_in, $start_date_in, $end_date_in, $reocurrance_type_in, $category_in )
 	{
 		$this->id 			 		= $id_in;
 		$this->user_id	 	 		= $user_id_in;
 		$this->amount	 	 		= $amount_in;
 		$this->start_date	 		= $start_date_in;
-		$this->reocurrance_type	 	= $reocurrance_type_in;
 		$this->end_date				= $end_date_in;
+		$this->reocurrance_type	 	= $reocurrance_type_in;
 		$this->category				= $category_in;
 	}
 	
@@ -48,7 +48,7 @@ class UserDirectDebit implements JsonSerializable
         return [
             'id' 					=> $this->id,
             'user_id' 				=> $this->user_id,
-            'start_date' 			=> $this->amount,
+            'amount' 				=> $this->amount,
 			'start_date'			=> $this->start_date,
 			'end_date' 				=> $this->end_date,
 			'recourrance_type'		=> $this->reocurrance_type,

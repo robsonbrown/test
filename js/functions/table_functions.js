@@ -4,10 +4,6 @@
 function load_list_information( $urlName, $header, $listPanelName )
 {	
 	var table = $("#" + $listPanelName );
-	
-	//$.tablesorter.clearTableBody( table );
-	
-	//$("#" + $listPanelName).tablesorter().remove();
 	var rows;
 	
 	$.ajax
@@ -103,7 +99,7 @@ function get_columns_for_table( $header, rows )
 		
 		case "directDebitListPanel": 
 		{
-			return [ rows[$i].amount, rows[$i].start_date, rows[$i].end_date, rows[$i].reocurrance_type ];
+			return [ rows[$i].amount, rows[$i].start_date, rows[$i].end_date, rows[$i].recourrance_type, rows[$i].category ];
 		}
 		break;
 		
@@ -135,7 +131,7 @@ function get_headers_for_table( header )
 		
 		case "directDebitListPanel": 
 		{
-			return [ "Amount", "Start Date", "End Date", "Recourrance Type" ];
+			return [ "Amount", "Start Date", "End Date", "Recourrance Type", "Category" ];
 		}
 		break;
 		

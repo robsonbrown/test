@@ -123,14 +123,51 @@
 				}
 			}
 			break;
+			//-------------------
+			// Post function for the add target option
+			//-------------------
+			case 'addTarget':
+			{
+				$values=$_POST['array'];
+				
+				$amount = $values[0];
+				$target_date = $values[1];
+				$category = $values[2]; 
+				$name = $values[3]; 
+				
+				$user = $_SESSION['user'];
+				
+				if( $user->insert_target_transaction( $amount, $target_date, $category, $name ) )
+				{
+					echo false;
+				}
+			}
+			break;
+			//-------------------
+			// Post function for the add target option
+			//-------------------
+			case 'addDirectDebit':
+			{
+				$values=$_POST['array'];
+				
+				$amount = $values[0];
+				$start_date = $values[1];
+				$end_date = $values[2]; 
+				$recourrance_type = $values[3]; 
+				$category = $values[4]; 
+				
+				$user = $_SESSION['user'];
+			
+				if( $user->insert_direct_debit_transaction( $amount, $start_date, $end_date, $recourrance_type, $category ) )
+				{
+					echo false;
+				}
+			}
+			break;
+			default:
+			echo false;
+			break;
 		}
-		//-------------------
-		// Post function for the add target option
-		//-------------------
-		//case 'addTarget':
-		//{
-		//}
-		//break;
 		
 		echo true;
 	}
