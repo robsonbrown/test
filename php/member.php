@@ -1,7 +1,7 @@
 ﻿<?php
 	include_once($_SERVER['DOCUMENT_ROOT'].'/phpConsole.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/classes/user.php');
-	include_once($_SERVER['DOCUMENT_ROOT'].'/utilities/user_transaction_utilities.php');
+	include_once($_SERVER['DOCUMENT_ROOT'].'/utilities/transaction_utilities.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/session/session_handler.php');
 	
 	PhpConsole::start(true, true, dirname(__FILE__));
@@ -74,60 +74,65 @@
 	{
 		$header = $_POST['head'];
 		
-		//-------------------
-		// Post function for the set initial funds total option
-		//-------------------
-		if( $header == 'setInitialFinance' )
+		debug( $header . ' called.');
+		
+		
+		switch( $header )
 		{
-			$total=$_POST['total']; 
-			
-			$user = $_SESSION['user'];
-		
-			if( $user->complete_full_setup( $total ) )
+			//-------------------
+			// Post function for the set initial funds total option
+			//-------------------
+			case 'setInitialFinance':
 			{
-				//debug( 'passed!');
-				echo true;
-			}
-			else
-			{
-				echo false;
-			}
+				$total=$_POST['total']; 
 			
+				$user = $_SESSION['user'];
+			
+				if( !$user->complete_full_setup( $total ) )
+				{
+					echo false;
+				}
+			}
+			break;
+			//-------------------
+			// Post function for the add transaction option
+			//-------------------
+			case 'addFinance':
+			case 'removeFinance':
+			{
+				$values=$_POST['array'];
+			
+				$amount = $values[0];
+				$time = $values[1];
+				$category = $values[2]; 
+				
+				if( $header == 'addFinance' )
+				{
+					$type = UserTransaction::TT_ADDITION;
+				}
+				else
+				{
+					$type = UserTransaction::TT_WITHDRAWAL;
+				}
+				
+				$user = $_SESSION['user'];
+				
+				if( !$user->insert_user_transaction( $amount, $time, $category, $type ) )
+				{
+					echo false;
+				}
+			}
+			break;
 		}
 		//-------------------
-		// Post function for the add transaction option
+		// Post function for the add target option
 		//-------------------
-		else if( $header == 'addFinance' || $header == 'removeFinance' )
-		{				
-			debug( $header . ' called.');
-			
-			$values=$_POST['array'];
-			
-			$amount = $values[0];
-			$time = $values[1];
-			$category = $values[2]; 
-			
-			if( $header == 'addFinance' )
-			{
-				$type = UserTransaction::TT_ADDITION;
-			}
-			else
-			{
-				$type = UserTransaction::TT_WITHDRAWAL;
-			}
-			
-			//debug( 'amount is : ' . $amount . ' time is : ' . $time . ' category is : ' . $category );
+		//case 'addTarget':
+		//{
+		//}
+		//break;
 		
-			if( insert_user_transaction( $amount, $time, $category, $type ) )
-			{
-				//debug( 'passed!');
-				echo true;
-			}
-			else
-			{
-				echo false;
-			}
-		}
+		echo true;
 	}
 
 	check_session_state();

@@ -134,6 +134,15 @@ function validate_form_data( id_in )
 			bValid = bValid && checkLength( $( "#category" ), "category", 1, 10 );
 		}
 		break;
+		case TMStatus.DIRECT_DEBIT:
+		{
+			bValid = bValid && checkLength( $( "#amount" ), "amount", 1, 16 );
+			bValid = bValid && checkRegexp( $( "#amount" ), /([0-9]+(\.[0-9][0-9]?)?)/, "Only allow : 0-9 and ." );
+			
+			bValid = bValid && checkLength( $( "#start_date" ), "start_date", 1, 10 );
+			bValid = bValid && checkLength( $( "#end_date" ), "end_date", 1, 10 );
+		}
+		break;
 		default:
 		break;
 	}
@@ -159,6 +168,17 @@ function get_form_header_name( id_in, add_button_status )
 				return "removeFinance";
 			}
 		}
+		break;
+		case TMStatus.DIRECT_DEBIT:
+		{	
+			return "addDirectDebit";
+		}
+		break;
+		case TMStatus.TARGET:
+		{
+			return 'addTarget';
+		}
+		break;
 		default:
 		break;
 	}
